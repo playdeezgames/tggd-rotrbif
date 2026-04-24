@@ -28,3 +28,10 @@ let doSideEffect
     context 
     |> sideEffect
     context
+
+let transformState
+        (transformer : MetaphorState.``Metaphor State`` -> MetaphorState.``Metaphor State``)
+        (context: ``Metaphor Context``)
+        : ``Metaphor Context`` =
+    {context with 
+        State = context.State |> transformer}

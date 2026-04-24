@@ -1,6 +1,60 @@
 [<RequireQualifiedAccess>]
 module internal InputProcessor
 
+open System
+
+type private Subcommand =
+    | Quit
+    | Status
+    | Turn of Turn.Turn
+
+type private Command =
+    | Statement of Subcommand
+    | Question of Subcommand
+    | Exclamation of Subcommand
+
+let private parseTurn (tokens: string list) : Turn.Turn option=
+    match tokens with
+    | ["left"]   -> Turn.Turn.Left   |> Some
+    | ["right"]  -> Turn.Turn.Right  |> Some
+    | ["around"] -> Turn.Turn.Around |> Some
+    | _          -> None
+
+let private parseSubcommand(input:string) : Subcommand option =
+    let tokens = input.Split([|' '|], StringSplitOptions.RemoveEmptyEntries) |> Array.toList
+    match tokens with
+    | ["Quit"] -> 
+        Subcommand.Quit 
+        |> Some
+    | ["Status"] -> 
+        Subcommand.Status 
+        |> Some
+    | "Turn" :: subtokens -> 
+        subtokens 
+        |> parseTurn 
+        |> Option.map Subcommand.Turn
+    | _ -> 
+        None
+
+let private parseCommand (input: string) : Command option =
+    let subcommand = 
+        input 
+        |> Seq.truncate (max 0 (input.Length-1)) 
+        |> System.String.Concat 
+        |> parseSubcommand
+    let ending = 
+        input 
+        |> Seq.tryLast
+    match ending, subcommand with
+    | Some '.', Some x -> x |> Command.Statement   |> Some
+    | Some '?', Some x -> x |> Command.Question    |> Some
+    | Some '!', Some x -> x |> Command.Exclamation |> Some
+    | _                -> None
+
+// ^ Parsing
+/////////////////////////////////////
+// v Handling
+
 let private ``Show Status`` 
         (context:MetaphorContext.``Metaphor Context``) 
         : unit =
@@ -13,35 +67,25 @@ let private ``Show Status``
     |> sprintf "Facing: %s"
     |> context.Outputter
 
-type private Subcommand =
-    | Quit
-    | Status
+let private executeTurn 
+        (turn:Turn.Turn) 
+        (state:MetaphorState.``Metaphor State``) 
+        : MetaphorState.``Metaphor State`` =
+    {state with Facing = state.Facing |> CardinalDirection.turn turn}
 
-type private Command =
-    | Statement of Subcommand
-    | Question of Subcommand
-    | Exclamation of Subcommand
+let private reportTurn 
+        (turn:Turn.Turn) 
+        (context:MetaphorContext.``Metaphor Context``) 
+        : unit =
+    turn
+    |> Turn.getName
+    |> sprintf "You turn %s."
+    |> context.Outputter
 
-let private parseSubcommand(input:string) : Subcommand option =
-    match input with
-    | "Quit" -> Subcommand.Quit |> Some
-    | "Status" -> Subcommand.Status |> Some
-    | _ -> None
-
-let private parseCommand (input: string) : Command option =
-    let subcommand = 
-        input 
-        |> Seq.truncate (max 0 (input.Length-1)) 
-        |> System.String.Concat 
-        |> parseSubcommand
-    let ending = 
-        input 
-        |> Seq.tryLast
-    match ending, subcommand with
-    | Some '.', Some x -> x |> Command.Statement |> Some
-    | Some '?', Some x -> x |> Command.Question |> Some
-    | Some '!', Some x -> x |> Command.Exclamation |> Some
-    | _ -> None
+    context.State.Facing
+    |> CardinalDirection.getName
+    |> sprintf "You are now facing %s."
+    |> context.Outputter
 
 let private invalidCommand 
         (context:MetaphorContext.``Metaphor Context``)
@@ -60,6 +104,11 @@ let internal ``Process Input``
             match s with
             | Quit -> 
                 None
+            | Turn turn ->
+                context
+                |> MetaphorContext.transformState (executeTurn turn)
+                |> MetaphorContext.doSideEffect (reportTurn turn)
+                |> Some
             | _ -> 
                 context 
                 |> MetaphorContext.doSideEffect invalidCommand
