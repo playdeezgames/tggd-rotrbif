@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="CardinalDirection.fs" />
     <Compile Include="MetaphorState.fs" />
     <Compile Include="MetaphorContext.fs" />
     <Compile Include="InputProcessor.fs" />

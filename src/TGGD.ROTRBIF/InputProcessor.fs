@@ -8,6 +8,11 @@ let private ``Show Status``
     |> sprintf "Status: %s"
     |> context.Outputter
 
+    context.State.Facing
+    |> CardinalDirection.getName
+    |> sprintf "Facing: %s"
+    |> context.Outputter
+
 type private Subcommand =
     | Quit
     | Status
