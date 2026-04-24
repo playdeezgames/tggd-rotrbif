@@ -20,3 +20,11 @@ let create
         Outputter = outputter
         State = state
     }
+
+let doSideEffect 
+        (sideEffect: ``Metaphor Context`` -> unit) 
+        (context: ``Metaphor Context``) 
+        : ``Metaphor Context`` =
+    context 
+    |> sideEffect
+    context

@@ -11,7 +11,6 @@ figlet.Color <- Color.Fuchsia
 figlet
 |> AnsiConsole.Write
 
-
 let inputter() : string =
     "[olive]>[/]"
     |> AnsiConsole.Ask
