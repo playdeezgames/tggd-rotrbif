@@ -6,6 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="MetaphorState.fs" />
+    <Compile Include="MetaphorContext.fs" />
+    <Compile Include="InputProcessor.fs" />
     <Compile Include="Repl.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

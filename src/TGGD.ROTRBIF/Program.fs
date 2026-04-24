@@ -16,11 +16,8 @@ let inputter() : string =
     "[olive]>[/]"
     |> AnsiConsole.Ask
 
-{ 
-    Alive = true 
-    Inputter = inputter
-    Outputter = AnsiConsole.MarkupLine
-}
+(inputter, AnsiConsole.MarkupLine, MetaphorState.create())
+|||> MetaphorContext.create 
 |> Some
 |> ``Game Loop``
 |> ignore
