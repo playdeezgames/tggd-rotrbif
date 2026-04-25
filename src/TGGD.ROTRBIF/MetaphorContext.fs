@@ -18,7 +18,7 @@ type internal MetaphorContext = {
             {
                 Inputter  = inputter
                 Outputter = outputter
-                State     = state
+                State     = state |> StateInitializer.initialize
             }
 
         static member sideEffect 

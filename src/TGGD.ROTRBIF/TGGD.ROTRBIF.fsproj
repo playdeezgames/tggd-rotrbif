@@ -9,6 +9,7 @@
     <Compile Include="Turn.fs" />
     <Compile Include="CardinalDirection.fs" />
     <Compile Include="MetaphorState.fs" />
+    <Compile Include="StateInitializer.fs" />
     <Compile Include="MetaphorContext.fs" />
     <Compile Include="Command.fs" />
     <Compile Include="CommandHandler.fs" />

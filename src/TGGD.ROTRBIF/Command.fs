@@ -17,6 +17,7 @@ type private Command =
         | ["right"]  -> Turn.Right  |> Some
         | ["around"] -> Turn.Around |> Some
         | _          -> None
+
     static member private parseSubcommand(input:string) : Subcommand option =
         let tokens = input.Split([|' '|], StringSplitOptions.RemoveEmptyEntries) |> Array.toList
         match tokens with
@@ -32,6 +33,7 @@ type private Command =
             |> Option.map Subcommand.Turn
         | _ -> 
             None
+
     static member internal parse (input: string) : Command option =
         let subcommand = 
             input 
