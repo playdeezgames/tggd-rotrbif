@@ -63,8 +63,7 @@ let private showStatus
     |> sprintf "Status: %s"
     |> context.Outputter
 
-    context.State.Facing
-    |> CardinalDirection.getName
+    context.State.Facing.Name
     |> sprintf "Facing: %s"
     |> context.Outputter
 
@@ -72,7 +71,7 @@ let private executeTurn
         (turn:Turn) 
         (state:MetaphorState.MetaphorState) 
         : MetaphorState.MetaphorState =
-    {state with Facing = state.Facing |> CardinalDirection.turn turn}
+    {state with Facing = state.Facing |> CardinalDirection.CardinalDirection.turn turn}
 
 let private reportTurn 
         (turn:Turn) 
@@ -82,8 +81,7 @@ let private reportTurn
     |> sprintf "You turn %s."
     |> context.Outputter
 
-    context.State.Facing
-    |> CardinalDirection.getName
+    context.State.Facing.Name
     |> sprintf "You are now facing %s."
     |> context.Outputter
 
