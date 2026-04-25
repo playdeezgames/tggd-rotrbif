@@ -69,8 +69,8 @@ let private showStatus
 
 let private executeTurn 
         (turn:Turn) 
-        (state:MetaphorState.MetaphorState) 
-        : MetaphorState.MetaphorState =
+        (state:MetaphorState) 
+        : MetaphorState =
     {state with Facing = state.Facing |> CardinalDirection.turn turn}
 
 let private reportTurn 

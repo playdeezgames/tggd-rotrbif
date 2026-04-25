@@ -1,6 +1,7 @@
 ﻿open Repl
 open Spectre.Console
 open System
+open TGGD.ROTRBIF
 
 Console.BackgroundColor <- ConsoleColor.Yellow
 AnsiConsole.Clear()
@@ -15,7 +16,7 @@ let inputter() : string =
     "[olive]>[/]"
     |> AnsiConsole.Ask
 
-(inputter, AnsiConsole.MarkupLine, MetaphorState.MetaphorState.create())
+(inputter, AnsiConsole.MarkupLine, MetaphorState.create())
 |||> MetaphorContext.create 
 |> Some
 |> mutateMetaphor

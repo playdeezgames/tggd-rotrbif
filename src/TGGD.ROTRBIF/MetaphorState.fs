@@ -1,8 +1,6 @@
+namespace TGGD.ROTRBIF
+
 [<RequireQualifiedAccess>]
-module internal MetaphorState
-
-open TGGD.ROTRBIF
-
 type internal MetaphorState = {
         Alive: bool
         Facing: CardinalDirection

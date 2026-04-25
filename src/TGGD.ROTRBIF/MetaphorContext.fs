@@ -1,11 +1,13 @@
 [<RequireQualifiedAccess>]
 module internal MetaphorContext
 
+open TGGD.ROTRBIF
+
 type internal Outputter = string -> unit
 type internal Inputter = unit -> string
 
 type internal MetaphorContext = {
-        State: MetaphorState.MetaphorState
+        State: MetaphorState
         Inputter: Inputter
         Outputter: Outputter
     }
@@ -13,7 +15,7 @@ type internal MetaphorContext = {
 let create 
         (inputter: Inputter) 
         (outputter:Outputter) 
-        (state: MetaphorState.MetaphorState)
+        (state: MetaphorState)
         : MetaphorContext =
     {
         Inputter = inputter
@@ -30,7 +32,7 @@ let doSideEffect
     context
 
 let transformState
-        (transformer : MetaphorState.MetaphorState -> MetaphorState.MetaphorState)
+        (transformer : MetaphorState -> MetaphorState)
         (context: MetaphorContext)
         : MetaphorContext =
     {context with 
