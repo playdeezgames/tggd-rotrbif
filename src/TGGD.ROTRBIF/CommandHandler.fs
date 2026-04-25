@@ -13,6 +13,7 @@ module private CommandHandler =
             context.State.Facing.Name
             |> sprintf "Facing: %s"
             |> context.Outputter
+
         static member internal reportTurn 
                 (turn:Turn) 
                 (context:MetaphorContext) 
