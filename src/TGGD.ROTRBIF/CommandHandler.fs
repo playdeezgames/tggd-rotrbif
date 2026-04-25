@@ -24,7 +24,8 @@ module private CommandHandler =
             |> sprintf "You turn %s."
             |> context.Outputter
 
-            context.State.Facing.Name
+            let avatar = context.State |> MetaphorState.getAvatarCharacter
+            avatar.Facing.Name
             |> sprintf "You are now facing %s."
             |> context.Outputter
 
@@ -39,5 +40,13 @@ module private CommandHandler =
                 (turn:Turn) 
                 (state:MetaphorState) 
                 : MetaphorState =
-            {state with Facing = state.Facing |> CardinalDirection.turn turn}
+            {state with 
+                Characters = 
+                    state.Characters
+                    |> Map.add 
+                        state.AvatarId.Value {
+                            state.Characters.[state.AvatarId.Value] with 
+                                Facing = 
+                                    state.Characters.[state.AvatarId.Value].Facing 
+                                    |> CardinalDirection.turn turn}}
 

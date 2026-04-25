@@ -19,16 +19,12 @@ type internal CharacterState =
 type internal MetaphorState = {
         Characters : Map<Guid, CharacterState>
         AvatarId : Guid option
-        Alive: bool
-        Facing: CardinalDirection
     }
     with
         static member create () : MetaphorState =
             {
                 Characters = Map.empty
                 AvatarId = None
-                Alive = true
-                Facing = CardinalDirection.North
             }
 
         static member setCharacter 
