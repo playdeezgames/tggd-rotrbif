@@ -1,13 +1,15 @@
 [<RequireQualifiedAccess>]
 module internal MetaphorState
 
+open TGGD.ROTRBIF
+
 type internal MetaphorState = {
         Alive: bool
-        Facing: CardinalDirection.CardinalDirection
+        Facing: CardinalDirection
     }
 
 let create () : MetaphorState =
     {
         Alive = true
-        Facing = CardinalDirection.CardinalDirection.North
+        Facing = CardinalDirection.North
     }

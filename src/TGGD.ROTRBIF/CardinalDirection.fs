@@ -1,8 +1,6 @@
+namespace TGGD.ROTRBIF
+
 [<RequireQualifiedAccess>]
-module internal CardinalDirection
-
-open TGGD.ROTRBIF
-
 type internal CardinalDirection =
     | North
     | East
