@@ -1,14 +1,15 @@
-module internal Repl
+namespace TGGD.ROTRBIF
 
-open TGGD.ROTRBIF
-
-let rec internal mutateMetaphor 
-        (context:MetaphorContext option) 
-        : MetaphorContext option =
-    match context with
-    | Some s -> 
-        (s.Inputter(), s)
-        ||> InputProcessor.processInput
-        |> mutateMetaphor
-    | None -> None
+[<AutoOpen>]
+module ReplExtensions =
+    type MetaphorContext with
+        static member internal mutate
+                (context:MetaphorContext option) 
+                : MetaphorContext option =
+            match context with
+            | Some s -> 
+                (s.Inputter(), s)
+                ||> InputProcessor.processInput
+                |> MetaphorContext.mutate
+            | None -> None
 

@@ -1,5 +1,4 @@
-﻿open Repl
-open Spectre.Console
+﻿open Spectre.Console
 open System
 open TGGD.ROTRBIF
 
@@ -19,5 +18,5 @@ let inputter() : string =
 (inputter, AnsiConsole.MarkupLine, MetaphorState.create())
 |||> MetaphorContext.create 
 |> Some
-|> mutateMetaphor
+|> MetaphorContext.mutate
 |> ignore
