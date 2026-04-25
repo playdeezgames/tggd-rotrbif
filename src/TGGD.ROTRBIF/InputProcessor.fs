@@ -2,42 +2,46 @@ namespace TGGD.ROTRBIF
 
 [<AutoOpen>]
 module internal InputProcessor =
-    let private processInvalidCommand (context: MetaphorContext) : MetaphorContext option =
-        context 
-        |> MetaphorContext.doSideEffect MetaphorContext.invalidCommand
-        |> Some
-    let private processCommand (command:Command) (context: MetaphorContext) : MetaphorContext option =
-        match command with
-        | Statement s -> 
-            match s with
-            | Quit -> 
-                None
-            | Turn turn ->
-                context
-                |> MetaphorContext.transformState (MetaphorState.executeTurn turn)
-                |> MetaphorContext.doSideEffect (MetaphorContext.reportTurn turn)
-                |> Some
-            | _ -> 
-                context |> processInvalidCommand
-        | Question q -> 
-            match q with
-            | Status ->
-                context 
-                |> MetaphorContext.doSideEffect MetaphorContext.showStatus
-                |> Some
-            | _ ->
-                context |> processInvalidCommand
+    let private processInvalidCommand =
+        MetaphorContext.doSideEffect MetaphorContext.invalidCommand 
+        >> Some
+
+    let private processQuitCommand (_:MetaphorContext) : MetaphorContext option =
+        None
+
+    let private processTurnCommand (turn:Turn) =
+        MetaphorContext.transformState (MetaphorState.executeTurn turn)
+        >> MetaphorContext.doSideEffect (MetaphorContext.reportTurn turn)
+        >> Some
+
+    let private processStatement = function
+        | Quit -> 
+            processQuitCommand
+        | Turn turn ->
+            processTurnCommand turn
         | _ -> 
-            context |> processInvalidCommand
+            processInvalidCommand
+
+    let private processQuery = function
+        | Status ->
+            MetaphorContext.doSideEffect MetaphorContext.showStatus
+            >> Some
+        | _ ->
+            processInvalidCommand
+
+    let private processCommand = function
+        | Statement s -> 
+            processStatement s
+        | Question q -> 
+            processQuery q
+        | _ -> 
+            processInvalidCommand
+
     type MetaphorContext with
         static member internal processInput 
-                (input: string) 
-                (context: MetaphorContext) 
-                : MetaphorContext option =
+                (input: string) =
             match input |> Command.parse with
             | Some command -> 
-                context
-                |> processCommand command
+                processCommand command
             | _ -> 
-                context 
-                |> processInvalidCommand
+                processInvalidCommand
