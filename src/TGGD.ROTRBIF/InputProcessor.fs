@@ -55,8 +55,8 @@ let private parseCommand (input: string) : Command option =
 /////////////////////////////////////
 // v Handling
 
-let private ``Show Status`` 
-        (context:MetaphorContext.``Metaphor Context``) 
+let private showStatus 
+        (context:MetaphorContext.MetaphorContext) 
         : unit =
     if context.State.Alive then "Alive" else "Dead"
     |> sprintf "Status: %s"
@@ -75,7 +75,7 @@ let private executeTurn
 
 let private reportTurn 
         (turn:Turn.Turn) 
-        (context:MetaphorContext.``Metaphor Context``) 
+        (context:MetaphorContext.MetaphorContext) 
         : unit =
     turn.Name
     |> sprintf "You turn %s."
@@ -87,15 +87,15 @@ let private reportTurn
     |> context.Outputter
 
 let private invalidCommand 
-        (context:MetaphorContext.``Metaphor Context``)
+        (context:MetaphorContext.MetaphorContext)
         : unit =
     "[red]INVALID INPUT![/]"
     |> context.Outputter
 
-let internal ``Process Input`` 
+let internal processInput 
         (input: string) 
-        (context: MetaphorContext.``Metaphor Context``) 
-        : MetaphorContext.``Metaphor Context`` option =
+        (context: MetaphorContext.MetaphorContext) 
+        : MetaphorContext.MetaphorContext option =
     match input |> parseCommand with
     | Some command -> 
         match command with
@@ -116,7 +116,7 @@ let internal ``Process Input``
             match q with
             | Status ->
                 context 
-                |> MetaphorContext.doSideEffect ``Show Status``
+                |> MetaphorContext.doSideEffect showStatus
                 |> Some
             | _ ->
                 context

@@ -18,5 +18,5 @@ let inputter() : string =
 (inputter, AnsiConsole.MarkupLine, MetaphorState.create())
 |||> MetaphorContext.create 
 |> Some
-|> ``Game Loop``
+|> mutateMetaphor
 |> ignore

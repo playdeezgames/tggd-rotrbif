@@ -1,12 +1,12 @@
 module internal Repl
 
-let rec internal ``Game Loop`` 
-        (context:MetaphorContext.``Metaphor Context`` option) 
-        : MetaphorContext.``Metaphor Context`` option =
+let rec internal mutateMetaphor 
+        (context:MetaphorContext.MetaphorContext option) 
+        : MetaphorContext.MetaphorContext option =
     match context with
     | Some s -> 
         (s.Inputter(), s)
-        ||> InputProcessor.``Process Input``
-        |> ``Game Loop``
+        ||> InputProcessor.processInput
+        |> mutateMetaphor
     | None -> None
 
