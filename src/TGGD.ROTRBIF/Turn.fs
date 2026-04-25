@@ -1,4 +1,4 @@
-module internal Turn
+namespace TGGD.ROTRBIF
 
 [<RequireQualifiedAccess>]
 type Turn =

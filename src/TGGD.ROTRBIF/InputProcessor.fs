@@ -2,22 +2,23 @@
 module internal InputProcessor
 
 open System
+open TGGD.ROTRBIF
 
 type private Subcommand =
     | Quit
     | Status
-    | Turn of Turn.Turn
+    | Turn of Turn
 
 type private Command =
     | Statement of Subcommand
     | Question of Subcommand
     | Exclamation of Subcommand
 
-let private parseTurn (tokens: string list) : Turn.Turn option=
+let private parseTurn (tokens: string list) : Turn option=
     match tokens with
-    | ["left"]   -> Turn.Turn.Left   |> Some
-    | ["right"]  -> Turn.Turn.Right  |> Some
-    | ["around"] -> Turn.Turn.Around |> Some
+    | ["left"]   -> Turn.Left   |> Some
+    | ["right"]  -> Turn.Right  |> Some
+    | ["around"] -> Turn.Around |> Some
     | _          -> None
 
 let private parseSubcommand(input:string) : Subcommand option =
@@ -68,13 +69,13 @@ let private showStatus
     |> context.Outputter
 
 let private executeTurn 
-        (turn:Turn.Turn) 
+        (turn:Turn) 
         (state:MetaphorState.MetaphorState) 
         : MetaphorState.MetaphorState =
     {state with Facing = state.Facing |> CardinalDirection.turn turn}
 
 let private reportTurn 
-        (turn:Turn.Turn) 
+        (turn:Turn) 
         (context:MetaphorContext.MetaphorContext) 
         : unit =
     turn.Name
