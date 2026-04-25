@@ -1,12 +1,12 @@
 [<RequireQualifiedAccess>]
 module internal MetaphorState
 
-type internal ``Metaphor State`` = {
+type internal MetaphorState = {
         Alive: bool
         Facing: CardinalDirection.CardinalDirection
     }
 
-let create () : ``Metaphor State`` =
+let create () : MetaphorState =
     {
         Alive = true
         Facing = CardinalDirection.CardinalDirection.North

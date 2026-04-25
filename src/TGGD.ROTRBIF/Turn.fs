@@ -1,13 +1,12 @@
-[<RequireQualifiedAccess>]
 module internal Turn
 
+[<RequireQualifiedAccess>]
 type Turn =
     | Left
     | Right
     | Around
-
-let internal getName(turn:Turn) : string =
-    match turn with
-    | Left   -> "left"
-    | Right  -> "right"
-    | Around -> "around"
+    member internal this.Name = 
+        match this with
+        | Left -> "left"
+        | Right -> "right"
+        | Around -> "around"

@@ -5,7 +5,7 @@ type internal Outputter = string -> unit
 type internal Inputter = unit -> string
 
 type internal ``Metaphor Context`` = {
-        State: MetaphorState.``Metaphor State``
+        State: MetaphorState.MetaphorState
         Inputter: Inputter
         Outputter: Outputter
     }
@@ -13,7 +13,7 @@ type internal ``Metaphor Context`` = {
 let create 
         (inputter: Inputter) 
         (outputter:Outputter) 
-        (state: MetaphorState.``Metaphor State``)
+        (state: MetaphorState.MetaphorState)
         : ``Metaphor Context`` =
     {
         Inputter = inputter
@@ -30,7 +30,7 @@ let doSideEffect
     context
 
 let transformState
-        (transformer : MetaphorState.``Metaphor State`` -> MetaphorState.``Metaphor State``)
+        (transformer : MetaphorState.MetaphorState -> MetaphorState.MetaphorState)
         (context: ``Metaphor Context``)
         : ``Metaphor Context`` =
     {context with 
