@@ -9,7 +9,7 @@ module ReplExtensions =
             match context with
             | Some s -> 
                 (s.Inputter(), s)
-                ||> InputProcessor.processInput
+                ||> MetaphorContext.processInput
                 |> MetaphorContext.mutate
             | None -> None
 
