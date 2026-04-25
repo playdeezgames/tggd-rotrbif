@@ -7,9 +7,9 @@ type internal MetaphorState = {
         Alive: bool
         Facing: CardinalDirection
     }
-
-let create () : MetaphorState =
-    {
-        Alive = true
-        Facing = CardinalDirection.North
-    }
+    with
+        static member create () : MetaphorState =
+            {
+                Alive = true
+                Facing = CardinalDirection.North
+            }

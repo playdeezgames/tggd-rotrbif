@@ -15,7 +15,7 @@ let inputter() : string =
     "[olive]>[/]"
     |> AnsiConsole.Ask
 
-(inputter, AnsiConsole.MarkupLine, MetaphorState.create())
+(inputter, AnsiConsole.MarkupLine, MetaphorState.MetaphorState.create())
 |||> MetaphorContext.create 
 |> Some
 |> mutateMetaphor
