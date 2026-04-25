@@ -20,14 +20,16 @@ type internal MetaphorContext = {
                 Outputter = outputter
                 State     = state
             }
-        static member doSideEffect 
+
+        static member sideEffect 
                 (sideEffect : MetaphorContext -> unit) 
                 (context    : MetaphorContext) 
                 : MetaphorContext =
             context 
             |> sideEffect
             context
-        static member transformState
+
+        static member mutateState
                 (transformer : MetaphorState -> MetaphorState)
                 (context     : MetaphorContext)
                 : MetaphorContext =

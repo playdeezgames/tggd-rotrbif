@@ -3,15 +3,15 @@ namespace TGGD.ROTRBIF
 [<AutoOpen>]
 module internal InputProcessor =
     let private processInvalidCommand =
-        MetaphorContext.doSideEffect MetaphorContext.invalidCommand 
+        MetaphorContext.sideEffect MetaphorContext.invalidCommand 
         >> Some
 
     let private processQuitCommand (_:MetaphorContext) : MetaphorContext option =
         None
 
     let private processTurnCommand (turn:Turn) =
-        MetaphorContext.transformState (MetaphorState.executeTurn turn)
-        >> MetaphorContext.doSideEffect (MetaphorContext.reportTurn turn)
+        MetaphorContext.mutateState (MetaphorState.executeTurn turn)
+        >> MetaphorContext.sideEffect (MetaphorContext.reportTurn turn)
         >> Some
 
     let private processStatement = function
@@ -24,7 +24,7 @@ module internal InputProcessor =
 
     let private processQuery = function
         | Status ->
-            MetaphorContext.doSideEffect MetaphorContext.showStatus
+            MetaphorContext.sideEffect MetaphorContext.showStatus
             >> Some
         | _ ->
             processInvalidCommand
