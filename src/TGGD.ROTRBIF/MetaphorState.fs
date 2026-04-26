@@ -15,6 +15,9 @@ type internal CharacterState =
                 Facing = facing
             }
 
+        static member mutateFacing (mutator : CardinalDirection -> CardinalDirection) (characterState:CharacterState) : CharacterState =
+            {characterState with Facing = characterState.Facing |> mutator}
+
 [<RequireQualifiedAccess>]
 type internal MetaphorState = {
         Characters : Map<Guid, CharacterState>

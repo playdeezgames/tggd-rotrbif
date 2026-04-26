@@ -40,13 +40,10 @@ module private CommandHandler =
                 (turn:Turn) 
                 (state:MetaphorState) 
                 : MetaphorState =
+            let avatarId = state.AvatarId.Value
+            let avatarCharacter = state.Characters.[avatarId]
             {state with 
                 Characters = 
                     state.Characters
                     |> Map.add 
-                        state.AvatarId.Value {
-                            state.Characters.[state.AvatarId.Value] with 
-                                Facing = 
-                                    state.Characters.[state.AvatarId.Value].Facing 
-                                    |> CardinalDirection.turn turn}}
-
+                        avatarId ((CardinalDirection.turn turn, avatarCharacter) ||> CharacterState.mutateFacing)}
