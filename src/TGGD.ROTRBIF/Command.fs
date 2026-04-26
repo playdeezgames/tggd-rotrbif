@@ -11,8 +11,7 @@ type private Command =
     | Statement of Subcommand
     | Question of Subcommand
     | Exclamation of Subcommand
-    static member private parseTurn (tokens: string list) : Turn option=
-        match tokens with
+    static member private parseTurn = function
         | ["left"]   -> Turn.Left   |> Some
         | ["right"]  -> Turn.Right  |> Some
         | ["around"] -> Turn.Around |> Some
