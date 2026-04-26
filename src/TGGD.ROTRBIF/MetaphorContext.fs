@@ -5,6 +5,7 @@ type internal Inputter = unit -> string
 
 [<RequireQualifiedAccess>]
 type internal MetaphorContext = {
+        Metaphor  : Metaphor
         State     : MetaphorState
         Inputter  : Inputter
         Outputter : Outputter
@@ -15,10 +16,12 @@ type internal MetaphorContext = {
                 (outputter : Outputter) 
                 (state     : MetaphorState)
                 : MetaphorContext =
+            let state' = state |> StateInitializer.initialize
             {
                 Inputter  = inputter
                 Outputter = outputter
-                State     = state |> StateInitializer.initialize
+                State     = state'
+                Metaphor  = {State = state'}
             }
 
         static member sideEffect 
