@@ -6,7 +6,6 @@ type internal Inputter = unit -> string
 [<RequireQualifiedAccess>]
 type internal MetaphorContext = {
         Metaphor  : Metaphor
-        State     : MetaphorState
         Inputter  : Inputter
         Outputter : Outputter
     }
@@ -20,7 +19,6 @@ type internal MetaphorContext = {
             {
                 Inputter  = inputter
                 Outputter = outputter
-                State     = state'
                 Metaphor  = {State = state'}
             }
 
@@ -37,6 +35,6 @@ type internal MetaphorContext = {
                 (context     : MetaphorContext)
                 : MetaphorContext =
             {context with 
-                State = 
-                    context.State 
-                    |> transformer}
+                Metaphor = 
+                    context.Metaphor
+                    |> TGGD.ROTRBIF.Metaphor.mutateState transformer}

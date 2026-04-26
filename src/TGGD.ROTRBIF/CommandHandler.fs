@@ -6,7 +6,7 @@ module private CommandHandler =
         static member internal showStatus 
                 (context:MetaphorContext) 
                 : unit =
-            let avatar = context.State |> MetaphorState.getAvatarCharacter
+            let avatar = context.Metaphor.State |> MetaphorState.getAvatarCharacter
 
             if avatar.Alive then "Alive" else "Dead"
             |> sprintf "Status: %s"
@@ -24,7 +24,7 @@ module private CommandHandler =
             |> sprintf "You turn %s."
             |> context.Outputter
 
-            let avatar = context.State |> MetaphorState.getAvatarCharacter
+            let avatar = context.Metaphor.State |> MetaphorState.getAvatarCharacter
             avatar.Facing.Name
             |> sprintf "You are now facing %s."
             |> context.Outputter
