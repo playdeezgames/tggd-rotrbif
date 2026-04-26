@@ -12,6 +12,7 @@ type internal CardinalDirection =
         | East  -> "East"
         | South -> "South"
         | West  -> "West"
+    static member internal getName (direction: CardinalDirection) = direction.Name
     static member turn (turn:Turn) (direction: CardinalDirection) : CardinalDirection =
         match turn, direction with
         | Turn.Left  , CardinalDirection.North -> CardinalDirection.West
