@@ -1,3 +1,10 @@
 <Solution>
-  <Project Path="TGGD.ROTRBIF/TGGD.ROTRBIF.fsproj" />
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="ROTRBIF.Model/ROTRBIF.Model.vbproj" Id="1102e020-6ccd-460a-b6a9-4e27d5166bc8" />
+  <Project Path="ROTRBIFOS.Business/ROTRBIFOS.Business.vbproj" Id="a47e05ce-dce3-46e4-85b2-fdb0ac36d16f" />
+  <Project Path="ROTRBIFOS.Data/ROTRBIFOS.Data.vbproj" Id="8b973316-331b-4e50-b314-f0207a1fc5a2" />
+  <Project Path="ROTRBIFOS.UI/ROTRBIFOS.UI.vbproj" Id="030db999-9199-4ebb-b67f-8b5b068558de" />
+  <Project Path="ROTRBIFOS/ROTRBIFOS.vbproj" Id="9b44424a-317e-42c9-ac7e-fec2157a93e6" />
 </Solution>
