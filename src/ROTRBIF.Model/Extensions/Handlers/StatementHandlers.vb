@@ -1,60 +1,54 @@
-﻿Imports ROTRBIFOS.Business
+﻿Friend Module StatementHandlers
+    Const QuitCommand = "Quit"
+    Const TurnCommand = "Turn"
+    Const LeftToken = "left"
+    Const RightToken = "right"
+    Const AroundToken = "around"
 
-Friend Module StatementHandlers
-    Const Quit = "Quit"
-    Const Turn = "Turn"
-    Const left = "left"
-    Const right = "right"
-    Const around = "around"
-
-
-    Friend Sub HandleStatement(world As IWorld, tokens As IEnumerable(Of String), quit As Action, outputter As Action(Of String))
-        If tokens.Any Then
-            Dim remaining = tokens.Skip(1)
-            Select Case tokens.First
-                Case StatementHandlers.Quit
-                    HandleQuitStatement(world, remaining, quit, outputter)
-                Case Turn
-                    HandleTurnStatement(world, remaining, quit, outputter)
+    Friend Sub HandleStatement(context As IModelContext)
+        If context.HasTokens Then
+            Select Case context.ReadToken
+                Case StatementHandlers.QuitCommand
+                    HandleQuitStatement(context)
+                Case TurnCommand
+                    HandleTurnStatement(context)
                 Case Else
-                    HandleInvalidCommand(outputter)
+                    HandleInvalidCommand(context)
             End Select
         Else
-            HandleInvalidCommand(outputter)
+            HandleInvalidCommand(context)
         End If
     End Sub
 
-    Private Sub HandleTurnStatement(world As IWorld, remaining As IEnumerable(Of String), quit As Action, outputter As Action(Of String))
-        If remaining.Any Then
-            Dim token = remaining.First
-            remaining = remaining.Skip(1)
-            Select Case token
-                Case left
-                    HandleTurnStatment(world, Model.Turn.Left, remaining, quit, outputter)
-                Case right
-                    HandleTurnStatment(world, Model.Turn.Right, remaining, quit, outputter)
-                Case around
-                    HandleTurnStatment(world, Model.Turn.Around, remaining, quit, outputter)
+    Private Sub HandleTurnStatement(context As IModelContext)
+        If context.HasTokens Then
+            Select Case context.ReadToken
+                Case LeftToken
+                    HandleTurnStatment(context, Turn.Left)
+                Case RightToken
+                    HandleTurnStatment(context, Turn.Right)
+                Case AroundToken
+                    HandleTurnStatment(context, Turn.Around)
                 Case Else
-                    HandleInvalidCommand(outputter)
+                    HandleInvalidCommand(context)
             End Select
         Else
-            HandleInvalidCommand(outputter)
+            HandleInvalidCommand(context)
         End If
     End Sub
 
-    Private Sub HandleTurnStatment(world As IWorld, turn As Turn, remaining As IEnumerable(Of String), quit As Action, outputter As Action(Of String))
-        Dim avatar = world.Avatar
-        outputter($"{avatar.GetName()} turns {turn.GetName()}.")
+    Private Sub HandleTurnStatment(context As IModelContext, turn As Turn)
+        Dim avatar = context.World.Avatar
+        context.Output($"{avatar.GetName()} turns {turn.GetName()}.")
         avatar.Turn(turn)
-        outputter($"{avatar.GetName()} now faces {avatar.GetFacing().GetName()}.")
+        context.Output($"{avatar.GetName()} now faces {avatar.GetFacing().GetName()}.")
     End Sub
 
-    Private Sub HandleQuitStatement(world As IWorld, remaining As IEnumerable(Of String), quit As Action, outputter As Action(Of String))
-        If remaining.Any() Then
-            HandleInvalidCommand(outputter)
+    Private Sub HandleQuitStatement(context As IModelContext)
+        If context.HasTokens Then
+            HandleInvalidCommand(context)
         Else
-            quit()
+            context.Quit()
         End If
     End Sub
 

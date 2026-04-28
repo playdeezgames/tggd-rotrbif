@@ -1,29 +1,26 @@
-﻿Imports ROTRBIFOS.Business
+﻿Friend Module QuestionHandlers
+    Const StatusCommand = "Status"
 
-Friend Module QuestionHandlers
-    Const Status = "Status"
-
-    Friend Sub HandleQuestion(world As IWorld, tokens As IEnumerable(Of String), quit As Action, outputter As Action(Of String))
-        If tokens.Any Then
-            Dim remaining = tokens.Skip(1)
-            Select Case tokens.First
-                Case Status
-                    HandleStatusQuestion(world, remaining, quit, outputter)
+    Friend Sub HandleQuestion(context As IModelContext)
+        If context.HasTokens Then
+            Select Case context.ReadToken
+                Case StatusCommand
+                    HandleStatusQuestion(context)
                 Case Else
-                    HandleInvalidCommand(outputter)
+                    HandleInvalidCommand(context)
             End Select
         Else
-            HandleInvalidCommand(outputter)
+            HandleInvalidCommand(context)
         End If
     End Sub
 
-    Private Sub HandleStatusQuestion(world As IWorld, remaining As IEnumerable(Of String), quit As Action, outputter As Action(Of String))
-        If Not remaining.Any Then
-            Dim avatar = world.Avatar
-            outputter($"{avatar.GetName()} is {avatar.GetAliveStatus()}.")
-            outputter($"{avatar.GetName()} is facing {avatar.GetFacing().GetName()}.")
+    Private Sub HandleStatusQuestion(context As IModelContext)
+        If Not context.HasTokens Then
+            Dim avatar = context.World.Avatar
+            context.Output($"{avatar.GetName()} is {avatar.GetAliveStatus()}.")
+            context.Output($"{avatar.GetName()} is facing {avatar.GetFacing().GetName()}.")
         Else
-            HandleInvalidCommand(outputter)
+            HandleInvalidCommand(context)
         End If
     End Sub
 End Module

@@ -2,17 +2,26 @@ Imports System.Runtime.CompilerServices
 Imports ROTRBIFOS.Business
 
 Public Module WorldExtensions
+
+    Private ReadOnly commandTypeTable As IReadOnlyDictionary(Of CommandType, Action(Of IModelContext)) =
+        New Dictionary(Of CommandType, Action(Of IModelContext)) From
+        {
+            {CommandType.Exclamation, AddressOf HandleExclamation},
+            {CommandType.Statement, AddressOf HandleStatement},
+            {CommandType.Question, AddressOf HandleQuestion}
+        }
     <Extension>
     Public Sub HandleCommand(world As IWorld, command As ICommand, quit As Action, outputter As Action(Of String))
+        Dim context As IModelContext = New ModelContext(world, command.Tokens, quit, outputter)
         Select Case command.CommandType
             Case CommandType.Exclamation
-                HandleExclamation(world, command.Tokens, quit, outputter)
+                HandleExclamation(context)
             Case CommandType.Question
-                HandleQuestion(world, command.Tokens, quit, outputter)
+                HandleQuestion(context)
             Case CommandType.Statement
-                HandleStatement(world, command.Tokens, quit, outputter)
+                HandleStatement(context)
             Case Else
-                HandleInvalidCommand(outputter)
+                HandleInvalidCommand(context)
         End Select
     End Sub
 
