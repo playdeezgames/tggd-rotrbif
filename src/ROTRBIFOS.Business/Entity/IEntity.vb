@@ -1,5 +1,4 @@
-﻿Public Interface ICharacter
-    ReadOnly Property CharacterId As Guid
+﻿Public Interface IEntity
     Sub SetMetadata(metadataType As String, metadataValue As String)
     Sub SetTag(tagType As String)
     Sub SetStatistic(statisticType As String, statisticValue As Integer)

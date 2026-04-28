@@ -17,6 +17,7 @@
                 Dim avatar = x.World.Avatar
                 x.Output($"{avatar.GetName()} is {avatar.GetAliveStatus()}.")
                 x.Output($"{avatar.GetName()} is facing {avatar.GetFacing().GetName()}.")
+                x.Output($"{avatar.GetName()} is in {avatar.Location.GetName()}.")
             End Sub,
             AddressOf HandleInvalidCommand)
     End Sub

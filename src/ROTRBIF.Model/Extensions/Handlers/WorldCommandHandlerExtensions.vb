@@ -1,8 +1,7 @@
-Imports System.Runtime.CompilerServices
+﻿Imports System.Runtime.CompilerServices
 Imports ROTRBIFOS.Business
 
-Public Module WorldExtensions
-
+Public Module WorldCommandHandlerExtensions
     Private ReadOnly commandTypeTable As IReadOnlyDictionary(Of CommandType, Action(Of IModelContext)) =
         New Dictionary(Of CommandType, Action(Of IModelContext)) From
         {
@@ -17,17 +16,5 @@ Public Module WorldExtensions
             handler = AddressOf HandleInvalidCommand
         End If
         handler.Invoke(New ModelContext(world, command.Tokens, quit, outputter))
-    End Sub
-
-    <Extension>
-    Public Sub Initialize(world As IWorld)
-        world.Clear()
-        world.Avatar = world.CreateCharacter(AddressOf InitializeN00b)
-    End Sub
-
-    Private Sub InitializeN00b(character As ICharacter)
-        character.SetName("N00b")
-        character.SetAlive()
-        character.SetFacing(CardinalDirection.North)
     End Sub
 End Module
