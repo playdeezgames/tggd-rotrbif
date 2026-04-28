@@ -8,20 +8,16 @@
         }
 
     Friend Sub HandleQuestion(context As IModelContext)
-        Dim handler As Action(Of IModelContext) = Nothing
-        If Not context.HasTokens OrElse Not questionTable.TryGetValue(context.ReadToken, handler) Then
-            handler = AddressOf HandleInvalidCommand
-        End If
-        handler.Invoke(context)
+        context.Dispatch(questionTable, AddressOf HandleInvalidCommand)
     End Sub
 
     Private Sub HandleStatusQuestion(context As IModelContext)
-        If Not context.HasTokens Then
-            Dim avatar = context.World.Avatar
-            context.Output($"{avatar.GetName()} is {avatar.GetAliveStatus()}.")
-            context.Output($"{avatar.GetName()} is facing {avatar.GetFacing().GetName()}.")
-        Else
-            HandleInvalidCommand(context)
-        End If
+        context.TerminalDispatch(
+            Sub(x)
+                Dim avatar = x.World.Avatar
+                x.Output($"{avatar.GetName()} is {avatar.GetAliveStatus()}.")
+                x.Output($"{avatar.GetName()} is facing {avatar.GetFacing().GetName()}.")
+            End Sub,
+            AddressOf HandleInvalidCommand)
     End Sub
 End Module

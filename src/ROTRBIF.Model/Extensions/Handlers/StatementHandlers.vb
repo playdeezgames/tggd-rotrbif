@@ -13,11 +13,7 @@
         }
 
     Friend Sub HandleStatement(context As IModelContext)
-        Dim handler As Action(Of IModelContext) = Nothing
-        If Not context.HasTokens OrElse Not statementTable.TryGetValue(context.ReadToken, handler) Then
-            handler = AddressOf HandleInvalidCommand
-        End If
-        handler.Invoke(context)
+        context.Dispatch(statementTable, AddressOf HandleInvalidCommand)
     End Sub
 
     Private ReadOnly turnTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
@@ -29,11 +25,7 @@
         }
 
     Private Sub HandleTurnStatement(context As IModelContext)
-        Dim handler As Action(Of IModelContext) = Nothing
-        If Not context.HasTokens OrElse Not turnTable.TryGetValue(context.ReadToken, handler) Then
-            handler = AddressOf HandleInvalidCommand
-        End If
-        handler.Invoke(context)
+        context.Dispatch(turnTable, AddressOf HandleInvalidCommand)
     End Sub
 
     Private Function DoTurn(turn As Turn) As Action(Of IModelContext)
@@ -46,11 +38,7 @@
     End Function
 
     Private Sub HandleQuitStatement(context As IModelContext)
-        If context.HasTokens Then
-            HandleInvalidCommand(context)
-        Else
-            context.Quit()
-        End If
+        context.TerminalDispatch(Sub(x) x.Quit(), AddressOf HandleInvalidCommand)
     End Sub
 
 End Module

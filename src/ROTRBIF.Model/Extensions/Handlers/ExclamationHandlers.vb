@@ -1,13 +1,8 @@
 ﻿Friend Module ExclamationHandlers
+    Private ReadOnly exclamationTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
+        New Dictionary(Of String, Action(Of IModelContext))
 
     Friend Sub HandleExclamation(context As IModelContext)
-        If context.HasTokens Then
-            Select Case context.ReadToken()
-                Case Else
-                    HandleInvalidCommand(context)
-            End Select
-        Else
-            HandleInvalidCommand(context)
-        End If
+        context.Dispatch(exclamationTable, AddressOf HandleInvalidCommand)
     End Sub
 End Module
