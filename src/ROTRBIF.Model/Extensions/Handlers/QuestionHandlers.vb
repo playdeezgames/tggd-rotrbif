@@ -17,6 +17,9 @@
                 Dim avatar = x.World.Avatar
                 x.Output($"{avatar.GetName()} is {avatar.GetAliveStatus()}.")
                 x.Output($"{avatar.GetName()} is facing {avatar.GetFacing().GetName()}.")
+                If avatar.IsBentOver Then
+                    x.Output($"{avatar.GetName()} is bent over.")
+                End If
                 x.Output($"{avatar.GetName()} is in {avatar.Location.GetName()}.")
             End Sub,
             AddressOf HandleInvalidCommand)

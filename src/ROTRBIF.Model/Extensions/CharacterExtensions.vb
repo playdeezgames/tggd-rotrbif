@@ -30,4 +30,12 @@ Public Module CharacterExtensions
     Sub SetFacing(character As ICharacter, direction As CardinalDirection)
         character.SetStatistic(Statistics.FACING, CInt(direction))
     End Sub
+    <Extension>
+    Function IsBentOver(character As ICharacter) As Boolean
+        Return character.GetTag(Tags.BENT_OVER)
+    End Function
+    <Extension>
+    Sub BendOver(character As ICharacter)
+        character.SetTag(Tags.BENT_OVER)
+    End Sub
 End Module
