@@ -1,17 +1,18 @@
 ﻿Friend Module QuestionHandlers
     Const StatusCommand = "Status"
 
+    Private ReadOnly questionTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
+        New Dictionary(Of String, Action(Of IModelContext)) From
+        {
+            {StatusCommand, AddressOf HandleStatusQuestion}
+        }
+
     Friend Sub HandleQuestion(context As IModelContext)
-        If context.HasTokens Then
-            Select Case context.ReadToken
-                Case StatusCommand
-                    HandleStatusQuestion(context)
-                Case Else
-                    HandleInvalidCommand(context)
-            End Select
-        Else
-            HandleInvalidCommand(context)
+        Dim handler As Action(Of IModelContext) = Nothing
+        If Not context.HasTokens OrElse Not questionTable.TryGetValue(context.ReadToken, handler) Then
+            handler = AddressOf HandleInvalidCommand
         End If
+        handler.Invoke(context)
     End Sub
 
     Private Sub HandleStatusQuestion(context As IModelContext)

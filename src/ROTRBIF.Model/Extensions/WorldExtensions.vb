@@ -12,17 +12,11 @@ Public Module WorldExtensions
         }
     <Extension>
     Public Sub HandleCommand(world As IWorld, command As ICommand, quit As Action, outputter As Action(Of String))
-        Dim context As IModelContext = New ModelContext(world, command.Tokens, quit, outputter)
-        Select Case command.CommandType
-            Case CommandType.Exclamation
-                HandleExclamation(context)
-            Case CommandType.Question
-                HandleQuestion(context)
-            Case CommandType.Statement
-                HandleStatement(context)
-            Case Else
-                HandleInvalidCommand(context)
-        End Select
+        Dim handler As Action(Of IModelContext) = Nothing
+        If Not commandTypeTable.TryGetValue(command.CommandType, handler) Then
+            handler = AddressOf HandleInvalidCommand
+        End If
+        handler.Invoke(New ModelContext(world, command.Tokens, quit, outputter))
     End Sub
 
     <Extension>
