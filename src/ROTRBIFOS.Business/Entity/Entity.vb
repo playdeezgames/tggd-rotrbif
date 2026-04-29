@@ -27,5 +27,9 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
         Return EntityData.Statistics(statisticType)
     End Function
 
+    Public Sub ClearTag(tagType As String) Implements IEntity.ClearTag
+        EntityData.Tags.Remove(tagType)
+    End Sub
+
     Protected MustOverride ReadOnly Property EntityData As TEntity
 End Class

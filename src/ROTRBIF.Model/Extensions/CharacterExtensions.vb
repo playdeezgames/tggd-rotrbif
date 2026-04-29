@@ -38,4 +38,8 @@ Public Module CharacterExtensions
     Sub BendOver(character As ICharacter)
         character.SetTag(Tags.BENT_OVER)
     End Sub
+    <Extension>
+    Sub StraightenUp(character As ICharacter)
+        character.ClearTag(Tags.BENT_OVER)
+    End Sub
 End Module
