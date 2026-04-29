@@ -4,6 +4,12 @@ Imports Spectre.Console
 
 Module Program
     Sub Main(args As String())
+        Try
+            Console.Title = "ROTRBIF# of SPLORR!!"
+        Catch ex As PlatformNotSupportedException
+            'this doesn't work on the platform. no biggie. eat the exception.
+        End Try
+
         Console.BackgroundColor = ConsoleColor.Yellow
         AnsiConsole.Clear()
 
