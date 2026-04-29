@@ -1,4 +1,4 @@
-﻿Friend Module QuestionHandlers
+﻿Friend Module Questions
     Const StatusCommand = "Status"
 
     Private ReadOnly questionTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
@@ -7,7 +7,7 @@
             {StatusCommand, AddressOf HandleStatusQuestion}
         }
 
-    Friend Sub HandleQuestion(context As IModelContext)
+    Friend Sub Handle(context As IModelContext)
         context.Dispatch(questionTable, AddressOf HandleInvalidCommand)
     End Sub
 

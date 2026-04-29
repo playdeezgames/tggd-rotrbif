@@ -5,9 +5,9 @@ Public Module WorldCommandHandlerExtensions
     Private ReadOnly commandTypeTable As IReadOnlyDictionary(Of CommandType, Action(Of IModelContext)) =
         New Dictionary(Of CommandType, Action(Of IModelContext)) From
         {
-            {CommandType.Exclamation, AddressOf HandleExclamation},
-            {CommandType.Statement, AddressOf HandleStatement},
-            {CommandType.Question, AddressOf HandleQuestion}
+            {CommandType.Exclamation, AddressOf Exclamations.Handle},
+            {CommandType.Statement, AddressOf Statements.Handle},
+            {CommandType.Question, AddressOf Questions.Handle}
         }
     <Extension>
     Public Sub HandleCommand(world As IWorld, command As ICommand, quit As Action, outputter As Action(Of String))
