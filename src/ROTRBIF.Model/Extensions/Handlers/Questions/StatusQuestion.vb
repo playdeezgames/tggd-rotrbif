@@ -8,6 +8,9 @@
                 If avatar.IsBentOver Then
                     x.Output($"{avatar.GetName()} is bent over.")
                 End If
+                If avatar.HasCheckedIt Then
+                    x.Output($"{avatar.GetName()} has checked it {avatar.GetCheckCount()} times.")
+                End If
                 x.Output($"{avatar.GetName()} is in {avatar.Location.GetName()}.")
             End Sub,
             AddressOf HandleInvalidCommand)

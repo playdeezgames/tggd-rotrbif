@@ -12,6 +12,7 @@
             Sub(x)
                 Dim avatar = context.World.Avatar
                 If avatar.IsBentOver Then
+                    avatar.IncrementCheckCount()
                     context.Output($"{avatar.GetName()} checks it.")
                     context.Output($"It seems fine.")
                 Else

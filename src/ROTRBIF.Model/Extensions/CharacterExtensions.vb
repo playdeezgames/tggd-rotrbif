@@ -7,8 +7,8 @@ Public Module CharacterExtensions
         Return If(character.GetTag(Tags.ALIVE), "alive", "dead")
     End Function
     <Extension>
-    Function GetFacing(character As ICharacter) As CardinalDirection
-        Return CType(character.GetStatistic(Statistics.FACING), CardinalDirection)
+    Function GetFacing(character As ICharacter) As Direction
+        Return CType(character.GetStatistic(Statistics.FACING), Direction)
     End Function
     <Extension>
     Sub Turn(character As ICharacter, turn As Turn)
@@ -27,7 +27,7 @@ Public Module CharacterExtensions
         character.SetTag(Tags.ALIVE)
     End Sub
     <Extension>
-    Sub SetFacing(character As ICharacter, direction As CardinalDirection)
+    Sub SetFacing(character As ICharacter, direction As Direction)
         character.SetStatistic(Statistics.FACING, CInt(direction))
     End Sub
     <Extension>
@@ -41,5 +41,21 @@ Public Module CharacterExtensions
     <Extension>
     Sub StraightenUp(character As ICharacter)
         character.ClearTag(Tags.BENT_OVER)
+    End Sub
+    <Extension>
+    Sub SetCheckCount(character As ICharacter, checkCount As Integer)
+        character.SetStatistic(Statistics.CHECK_COUNT, checkCount)
+    End Sub
+    <Extension>
+    Function HasCheckedIt(character As ICharacter) As Boolean
+        Return character.GetStatistic(Statistics.CHECK_COUNT) > 0
+    End Function
+    <Extension>
+    Function GetCheckCount(character As ICharacter) As Integer
+        Return character.GetStatistic(Statistics.CHECK_COUNT)
+    End Function
+    <Extension>
+    Sub IncrementCheckCount(character As ICharacter)
+        character.SetCheckCount(character.GetCheckCount() + 1)
     End Sub
 End Module

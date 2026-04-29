@@ -14,37 +14,37 @@ Public Module TurnExtensions
             {Turn.Right, "right"},
             {Turn.Around, "around"}
         }
-    Private ReadOnly nextFacingTable As IReadOnlyDictionary(Of Turn, IReadOnlyDictionary(Of CardinalDirection, CardinalDirection)) =
-        New Dictionary(Of Turn, IReadOnlyDictionary(Of CardinalDirection, CardinalDirection)) From
+    Private ReadOnly nextFacingTable As IReadOnlyDictionary(Of Turn, IReadOnlyDictionary(Of Direction, Direction)) =
+        New Dictionary(Of Turn, IReadOnlyDictionary(Of Direction, Direction)) From
         {
             {
                 Turn.Left,
-                New Dictionary(Of CardinalDirection, CardinalDirection) From
+                New Dictionary(Of Direction, Direction) From
                 {
-                    {CardinalDirection.North, CardinalDirection.West},
-                    {CardinalDirection.East, CardinalDirection.North},
-                    {CardinalDirection.South, CardinalDirection.East},
-                    {CardinalDirection.West, CardinalDirection.South}
+                    {Direction.North, Direction.West},
+                    {Direction.East, Direction.North},
+                    {Direction.South, Direction.East},
+                    {Direction.West, Direction.South}
                 }
             },
             {
                 Turn.Right,
-                New Dictionary(Of CardinalDirection, CardinalDirection) From
+                New Dictionary(Of Direction, Direction) From
                 {
-                    {CardinalDirection.North, CardinalDirection.East},
-                    {CardinalDirection.East, CardinalDirection.South},
-                    {CardinalDirection.South, CardinalDirection.West},
-                    {CardinalDirection.West, CardinalDirection.North}
+                    {Direction.North, Direction.East},
+                    {Direction.East, Direction.South},
+                    {Direction.South, Direction.West},
+                    {Direction.West, Direction.North}
                 }
             },
             {
                 Turn.Around,
-                New Dictionary(Of CardinalDirection, CardinalDirection) From
+                New Dictionary(Of Direction, Direction) From
                 {
-                    {CardinalDirection.North, CardinalDirection.South},
-                    {CardinalDirection.East, CardinalDirection.West},
-                    {CardinalDirection.South, CardinalDirection.North},
-                    {CardinalDirection.West, CardinalDirection.East}
+                    {Direction.North, Direction.South},
+                    {Direction.East, Direction.West},
+                    {Direction.South, Direction.North},
+                    {Direction.West, Direction.East}
                 }
             }
         }
@@ -53,7 +53,7 @@ Public Module TurnExtensions
         Return nameTable(turn)
     End Function
     <Extension>
-    Function NextFacing(turn As Turn, direction As CardinalDirection) As CardinalDirection
+    Function NextFacing(turn As Turn, direction As Direction) As Direction
         Return nextFacingTable(turn)(direction)
     End Function
 End Module

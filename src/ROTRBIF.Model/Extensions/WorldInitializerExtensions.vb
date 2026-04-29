@@ -16,6 +16,7 @@ Public Module WorldInitializerExtensions
     Private Sub InitializeN00b(character As ICharacter)
         character.SetName("N00b")
         character.SetAlive()
-        character.SetFacing(CardinalDirection.North)
+        character.SetFacing(Direction.North)
+        character.SetCheckCount(0)
     End Sub
 End Module
