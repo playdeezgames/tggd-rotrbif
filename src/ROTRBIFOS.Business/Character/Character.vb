@@ -4,10 +4,8 @@ Friend Class Character
     Inherits Entity(Of CharacterData)
     Implements ICharacter
 
-    Private ReadOnly worldData As WorldData
-
     Private Sub New(worldData As WorldData, characterId As Guid)
-        Me.worldData = worldData
+        MyBase.New(worldData)
         Me.CharacterId = characterId
     End Sub
 

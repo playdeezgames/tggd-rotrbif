@@ -6,11 +6,11 @@ Public Module WorldInitializerExtensions
     Public Sub Initialize(world As IWorld)
         world.Clear()
         Dim blueRoom = world.CreateLocation(AddressOf InitializeBlueRoom)
-        world.Avatar = world.CreateCharacter(blueRoom, AddressOf InitializeN00b)
     End Sub
 
     Private Sub InitializeBlueRoom(location As ILocation)
         location.SetName("The Blue Room")
+        location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
     End Sub
 
     Private Sub InitializeN00b(character As ICharacter)

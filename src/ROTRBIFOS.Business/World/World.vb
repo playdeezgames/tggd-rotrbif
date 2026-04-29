@@ -27,18 +27,6 @@ Public Class World
         Return New World(worldData)
     End Function
 
-    Public Function CreateCharacter(location As ILocation, Optional characterInitializer As Action(Of ICharacter) = Nothing) As ICharacter Implements IWorld.CreateCharacter
-        Dim characterId = Guid.NewGuid
-        worldData.Characters(characterId) = New CharacterData With
-            {
-                .LocationId = location.LocationId
-            }
-        Dim character = Business.Character.TryFind(worldData, characterId)
-        location.AddCharacter(character)
-        characterInitializer?.Invoke(character)
-        Return character
-    End Function
-
     Public Function CreateLocation(Optional locationInitializer As Action(Of ILocation) = Nothing) As ILocation Implements IWorld.CreateLocation
         Dim locationId = Guid.NewGuid
         worldData.Locations(locationId) = New LocationData

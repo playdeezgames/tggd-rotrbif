@@ -6,4 +6,5 @@
     Function GetTag(tagType As String) As Boolean
     Function GetStatistic(statisticType As String) As Integer
     Sub ClearTag(tagType As String)
+    ReadOnly Property World As IWorld
 End Interface

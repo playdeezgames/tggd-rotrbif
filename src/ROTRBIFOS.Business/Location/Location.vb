@@ -4,10 +4,9 @@ Friend Class Location
     Inherits Entity(Of LocationData)
     Implements ILocation
 
-    Private ReadOnly worldData As WorldData
 
     Private Sub New(worldData As WorldData, locationId As Guid)
-        Me.worldData = worldData
+        MyBase.New(worldData)
         Me.LocationId = locationId
     End Sub
 
@@ -24,7 +23,21 @@ Friend Class Location
     End Sub
 
     Friend Shared Function TryFind(worldData As WorldData, locationId As Guid?) As ILocation
-        Return If(locationId.HasValue AndAlso worldData.Locations.ContainsKey(locationId.Value),
-            New Location(worldData, locationId.Value), Nothing)
+        Return If(
+            locationId.HasValue AndAlso worldData.Locations.ContainsKey(locationId.Value),
+            New Location(worldData, locationId.Value),
+            Nothing)
+    End Function
+
+    Public Function CreateCharacter(Optional characterInitializer As Action(Of ICharacter) = Nothing) As ICharacter Implements ILocation.CreateCharacter
+        Dim characterId = Guid.NewGuid
+        worldData.Characters(characterId) = New CharacterData With
+            {
+                .LocationId = LocationId
+            }
+        Dim character = Business.Character.TryFind(worldData, characterId)
+        AddCharacter(character)
+        characterInitializer?.Invoke(character)
+        Return character
     End Function
 End Class

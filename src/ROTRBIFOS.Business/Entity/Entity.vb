@@ -3,6 +3,12 @@
 Friend MustInherit Class Entity(Of TEntity As EntityData)
     Implements IEntity
 
+    Protected ReadOnly worldData As WorldData
+
+    Protected Sub New(worldData As WorldData)
+        Me.worldData = worldData
+    End Sub
+
     Public Sub SetMetadata(metadataType As String, metadataValue As String) Implements IEntity.SetMetadata
         EntityData.Metadatas(metadataType) = metadataValue
     End Sub
@@ -32,4 +38,10 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
     End Sub
 
     Protected MustOverride ReadOnly Property EntityData As TEntity
+
+    Public ReadOnly Property World As IWorld Implements IEntity.World
+        Get
+            Return Business.World.Create(WorldData)
+        End Get
+    End Property
 End Class
