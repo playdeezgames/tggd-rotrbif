@@ -1,7 +1,7 @@
 ﻿Friend Module StraightenStatement
     Const UpToken = "up"
 
-    Private ReadOnly bendTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
+    Private ReadOnly straightenTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
         New Dictionary(Of String, Action(Of IModelContext)) From
         {
             {UpToken, AddressOf HandleStraightenUpCommand}
@@ -22,6 +22,6 @@
     End Sub
 
     Friend Sub Handle(context As IModelContext)
-        context.Dispatch(bendTable, AddressOf HandleInvalidCommand)
+        context.Dispatch(straightenTable, AddressOf HandleInvalidCommand)
     End Sub
 End Module
