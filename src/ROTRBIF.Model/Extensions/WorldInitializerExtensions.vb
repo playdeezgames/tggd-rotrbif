@@ -9,7 +9,7 @@ Public Module WorldInitializerExtensions
     End Sub
 
     Private Sub InitializeBlueRoom(location As ILocation)
-        location.SetName("The Blue Room")
+        location.SetName("the blue room")
         location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
     End Sub
 
@@ -18,5 +18,6 @@ Public Module WorldInitializerExtensions
         character.SetAlive()
         character.SetFacing(Direction.North)
         character.SetCheckCount(0)
+        character.SetTag(Tags.HAS_ASS_KEY)
     End Sub
 End Module

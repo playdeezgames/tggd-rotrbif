@@ -58,4 +58,8 @@ Public Module CharacterExtensions
     Sub IncrementCheckCount(character As ICharacter)
         character.SetCheckCount(character.GetCheckCount() + 1)
     End Sub
+    <Extension>
+    Function HasAssKey(character As ICharacter) As Boolean
+        Return character.GetTag(Tags.HAS_ASS_KEY)
+    End Function
 End Module

@@ -1,7 +1,7 @@
 ﻿Imports ROTRBIFOS.Data
 
 Friend Class Character
-    Inherits Entity(Of CharacterData)
+    Inherits InventoryEntity(Of CharacterData)
     Implements ICharacter
 
     Private Sub New(worldData As WorldData, characterId As Guid)

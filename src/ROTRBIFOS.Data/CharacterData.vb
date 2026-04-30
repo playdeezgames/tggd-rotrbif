@@ -1,4 +1,4 @@
 ﻿Public Class CharacterData
-    Inherits EntityData
+    Inherits InventoryEntityData
     Public LocationId As Guid
 End Class

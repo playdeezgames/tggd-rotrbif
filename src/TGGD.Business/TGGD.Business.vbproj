@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>ROTRBIFOS.Business</RootNamespace>
+    <RootNamespace>TGGD.Business</RootNamespace>
     <TargetFramework>net10.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
   </PropertyGroup>
@@ -13,10 +13,5 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ROTRBIFOS.Data\ROTRBIFOS.Data.vbproj" />
-    <ProjectReference Include="..\TGGD.Business\TGGD.Business.vbproj" />
-  </ItemGroup>
 
 </Project>

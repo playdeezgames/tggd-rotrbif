@@ -11,4 +11,5 @@
   <Project Path="ROTRBIFOS.Data/ROTRBIFOS.Data.vbproj" Id="8b973316-331b-4e50-b314-f0207a1fc5a2" />
   <Project Path="ROTRBIFOS.UI/ROTRBIFOS.UI.vbproj" Id="030db999-9199-4ebb-b67f-8b5b068558de" />
   <Project Path="ROTRBIFOS/ROTRBIFOS.vbproj" Id="9b44424a-317e-42c9-ac7e-fec2157a93e6" />
+  <Project Path="TGGD.Business/TGGD.Business.vbproj" Id="2070f45d-bad4-4769-b747-e5a46c832116" />
 </Solution>
