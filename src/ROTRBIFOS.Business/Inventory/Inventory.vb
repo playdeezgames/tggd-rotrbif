@@ -12,6 +12,12 @@ Friend Class Inventory
         End Get
     End Property
 
+    Public ReadOnly Property Items As IEnumerable(Of IItem) Implements IInventory.Items
+        Get
+            Return InventoryData.ItemIds.Select(Function(x) Item.TryFind(worldData, x))
+        End Get
+    End Property
+
     Sub New(
            worldData As WorldData,
            inventoryId As Guid)
