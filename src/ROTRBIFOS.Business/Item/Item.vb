@@ -11,6 +11,15 @@ Friend Class Item
 
     Public ReadOnly Property ItemId As Guid Implements IItem.ItemId
 
+    Public Property Inventory As IInventory Implements IItem.Inventory
+        Get
+            Return Business.Inventory.TryFind(worldData, EntityData.InventoryId)
+        End Get
+        Set(value As IInventory)
+            EntityData.InventoryId = value.InventoryId
+        End Set
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As ItemData
         Get
             Return worldData.Items(ItemId)

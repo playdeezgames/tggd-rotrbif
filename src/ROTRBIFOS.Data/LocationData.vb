@@ -1,4 +1,4 @@
 ﻿Public Class LocationData
-    Inherits EntityData
+    Inherits InventoryEntityData
     Public Property CharacterIds As New HashSet(Of Guid)
 End Class

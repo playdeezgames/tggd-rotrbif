@@ -41,4 +41,10 @@ Friend Class ModelContext
         _tokens = _tokens.Skip(1)
         Return result
     End Function
+
+    Public Function ReadRemainingTokens() As String Implements IModelContext.ReadRemainingTokens
+        Dim result = String.Join(" ", _tokens)
+        _tokens = Array.Empty(Of String)
+        Return result
+    End Function
 End Class

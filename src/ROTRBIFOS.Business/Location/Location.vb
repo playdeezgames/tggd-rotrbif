@@ -1,7 +1,7 @@
 ﻿Imports ROTRBIFOS.Data
 
 Friend Class Location
-    Inherits Entity(Of LocationData)
+    Inherits InventoryEntity(Of LocationData)
     Implements ILocation
 
 

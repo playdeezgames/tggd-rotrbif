@@ -7,4 +7,5 @@ Friend Interface IModelContext
     ReadOnly Property World As IWorld
     ReadOnly Property HasTokens As Boolean
     Function ReadToken() As String
+    Function ReadRemainingTokens() As String
 End Interface

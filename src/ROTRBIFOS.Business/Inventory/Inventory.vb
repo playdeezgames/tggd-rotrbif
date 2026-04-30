@@ -4,7 +4,6 @@ Friend Class Inventory
     Implements IInventory
 
     Private ReadOnly worldData As WorldData
-    Private ReadOnly inventoryId As Guid
 
     Private ReadOnly Property InventoryData As InventoryData
         Get
@@ -18,11 +17,13 @@ Friend Class Inventory
         End Get
     End Property
 
+    Public ReadOnly Property InventoryId As Guid Implements IInventory.InventoryId
+
     Sub New(
            worldData As WorldData,
            inventoryId As Guid)
         Me.worldData = worldData
-        Me.inventoryId = inventoryId
+        Me.InventoryId = inventoryId
     End Sub
 
     Public Sub AddItem(item As IItem) Implements IInventory.AddItem
@@ -47,4 +48,8 @@ Friend Class Inventory
         itemInitializer?.Invoke(item)
         Return item
     End Function
+
+    Public Sub RemoveItem(item As IItem) Implements IInventory.RemoveItem
+        InventoryData.ItemIds.Remove(item.ItemId)
+    End Sub
 End Class
