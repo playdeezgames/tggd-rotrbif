@@ -5,6 +5,7 @@
     Const StraightenCommand = "Straighten"
     Const CheckCommand = "Check"
     Const DropCommand = "Drop"
+    Const TakeCommand = "Take"
 
     Private ReadOnly statementTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
         New Dictionary(Of String, Action(Of IModelContext)) From
@@ -14,7 +15,8 @@
             {BendCommand, AddressOf BendStatement.Handle},
             {StraightenCommand, AddressOf StraightenStatement.Handle},
             {CheckCommand, AddressOf CheckStatement.Handle},
-            {DropCommand, AddressOf DropStatement.Handle}
+            {DropCommand, AddressOf DropStatement.Handle},
+            {TakeCommand, AddressOf TakeStatement.Handle}
         }
 
     Friend Sub Handle(context As IModelContext)
