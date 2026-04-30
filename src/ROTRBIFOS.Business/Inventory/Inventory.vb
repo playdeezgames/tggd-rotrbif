@@ -19,6 +19,12 @@ Friend Class Inventory
 
     Public ReadOnly Property InventoryId As Guid Implements IInventory.InventoryId
 
+    Public ReadOnly Property HasItems As Boolean Implements IInventory.HasItems
+        Get
+            Return InventoryData.ItemIds.Count <> 0
+        End Get
+    End Property
+
     Sub New(
            worldData As WorldData,
            inventoryId As Guid)

@@ -11,7 +11,11 @@
                 If avatar.HasCheckedIt Then
                     x.Output($"{avatar.GetName()} has checked it {avatar.GetCheckCount()} times.")
                 End If
-                x.Output($"{avatar.GetName()} is in {avatar.Location.GetName()}.")
+                Dim location = avatar.Location
+                x.Output($"{avatar.GetName()} is in {location.GetName()}.")
+                If location.HasItems() Then
+                    x.Output($"{avatar.GetName()} sees things on the ground.")
+                End If
             End Sub,
             AddressOf HandleInvalidCommand)
     End Sub

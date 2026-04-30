@@ -15,14 +15,6 @@ Public Module CharacterExtensions
         character.SetFacing(turn.NextFacing(character.GetFacing()))
     End Sub
     <Extension>
-    Sub SetName(character As IEntity, name As String)
-        character.SetMetadata(Metadatas.NAME, name)
-    End Sub
-    <Extension>
-    Function GetName(character As IEntity) As String
-        Return character.GetMetadata(Metadatas.NAME)
-    End Function
-    <Extension>
     Sub SetAlive(character As ICharacter)
         character.SetTag(Tags.ALIVE)
     End Sub
