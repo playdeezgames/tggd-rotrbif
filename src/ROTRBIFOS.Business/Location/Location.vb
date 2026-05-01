@@ -31,6 +31,10 @@ Friend Class Location
         EntityData.RouteIds(direction) = route.RouteId
     End Sub
 
+    Public Sub RemoveCharacter(character As ICharacter) Implements ILocation.RemoveCharacter
+        EntityData.CharacterIds.Remove(character.CharacterId)
+    End Sub
+
     Friend Shared Function TryFind(worldData As WorldData, locationId As Guid?) As ILocation
         Return If(
             locationId.HasValue AndAlso worldData.Locations.ContainsKey(locationId.Value),
@@ -60,5 +64,13 @@ Friend Class Location
         AddRoute(direction, route)
         routeInitializer?.Invoke(route)
         Return route
+    End Function
+
+    Public Function GetRoute(direction As String) As IRoute Implements ILocation.GetRoute
+        Dim routeId As Guid
+        If EntityData.RouteIds.TryGetValue(direction, routeId) Then
+            Return Route.TryFind(worldData, routeId, direction)
+        End If
+        Return Nothing
     End Function
 End Class

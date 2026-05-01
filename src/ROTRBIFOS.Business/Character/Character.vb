@@ -29,7 +29,11 @@ Friend Class Character
             Return Business.Location.TryFind(worldData, EntityData.LocationId)
         End Get
         Set(value As ILocation)
-            Throw New NotImplementedException()
+            If value.LocationId <> Location.LocationId Then
+                Location.RemoveCharacter(Me)
+                EntityData.LocationId = value.LocationId
+                Location.AddCharacter(Me)
+            End If
         End Set
     End Property
 End Class
