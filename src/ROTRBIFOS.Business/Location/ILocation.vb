@@ -8,4 +8,6 @@
     Sub AddRoute(direction As String, route As IRoute)
     Function GetRoute(direction As String) As IRoute
     Sub RemoveCharacter(character As ICharacter)
+    Function CreateFeature(Optional featureInitializer As Action(Of IFeature) = Nothing) As IFeature
+    Sub AddFeature(feature As IFeature)
 End Interface

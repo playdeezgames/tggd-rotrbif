@@ -35,6 +35,10 @@ Friend Class Location
         EntityData.CharacterIds.Remove(character.CharacterId)
     End Sub
 
+    Public Sub AddFeature(feature As IFeature) Implements ILocation.AddFeature
+        EntityData.FeatureIds.Add(feature.FeatureId)
+    End Sub
+
     Friend Shared Function TryFind(worldData As WorldData, locationId As Guid?) As ILocation
         Return If(
             locationId.HasValue AndAlso worldData.Locations.ContainsKey(locationId.Value),
@@ -72,5 +76,17 @@ Friend Class Location
             Return Route.TryFind(worldData, routeId, direction)
         End If
         Return Nothing
+    End Function
+
+    Public Function CreateFeature(Optional featureInitializer As Action(Of IFeature) = Nothing) As IFeature Implements ILocation.CreateFeature
+        Dim featureId = Guid.NewGuid
+        worldData.Features(featureId) = New FeatureData With
+            {
+                .LocationId = LocationId
+            }
+        Dim feature = Business.Feature.TryFind(worldData, featureId)
+        AddFeature(feature)
+        featureInitializer?.Invoke(feature)
+        Return feature
     End Function
 End Class

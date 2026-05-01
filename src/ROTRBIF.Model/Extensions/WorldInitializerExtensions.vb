@@ -6,7 +6,21 @@ Public Module WorldInitializerExtensions
     Public Sub Initialize(world As IWorld)
         world.Clear()
         Dim blueRoom = world.CreateLocation(AddressOf InitializeBlueRoom)
+        world.CreateLocation(InitializeLoft(blueRoom))
         Dim nextRoom = world.CreateLocation(InitializeNextRoom(blueRoom))
+    End Sub
+
+    Private Function InitializeLoft(blueRoom As ILocation) As Action(Of ILocation)
+        Return Sub(location)
+                   location.SetName("the loft")
+                   location.CreateRoute("down", blueRoom)
+                   blueRoom.CreateRoute("up", location)
+                   location.CreateFeature(AddressOf InitializeLoftCrate)
+               End Sub
+    End Function
+
+    Private Sub InitializeLoftCrate(feature As IFeature)
+        feature.SetName("crate")
     End Sub
 
     Private Function InitializeNextRoom(blueRoom As ILocation) As Action(Of ILocation)
