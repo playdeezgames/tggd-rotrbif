@@ -17,6 +17,7 @@ Public Module WorldInitializerExtensions
                         location,
                         Sub(r)
                             r.SetTag(Tags.IS_LOCKED)
+                            r.SetMetadata(Metadatas.KEY_TYPE, KeyTypes.ASS_KEY)
                         End Sub)
                    location.CreateRoute(Direction.South.GetName(), blueRoom)
                End Sub

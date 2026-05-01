@@ -37,6 +37,7 @@ Friend Module CheckStatement
 
     Private Sub InitializeAssKey(item As IItem)
         item.SetName("ass key")
+        item.SetMetadata(Metadatas.KEY_TYPE, KeyTypes.ASS_KEY)
     End Sub
 
     Friend Sub Handle(context As IModelContext)

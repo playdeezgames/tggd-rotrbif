@@ -58,4 +58,8 @@ Friend Class Inventory
     Public Sub RemoveItem(item As IItem) Implements IInventory.RemoveItem
         InventoryData.ItemIds.Remove(item.ItemId)
     End Sub
+
+    Public Function FindItems(predicate As Func(Of IItem, Boolean)) As IEnumerable(Of IItem) Implements IInventory.FindItems
+        Return Items.Where(predicate)
+    End Function
 End Class

@@ -5,4 +5,5 @@
     Sub RemoveItem(item As IItem)
     ReadOnly Property InventoryId As Guid
     ReadOnly Property HasItems As Boolean
+    Function FindItems(predicate As Func(Of IItem, Boolean)) As IEnumerable(Of IItem)
 End Interface

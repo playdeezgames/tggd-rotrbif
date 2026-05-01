@@ -22,7 +22,11 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
     End Sub
 
     Public Function GetMetadata(metadataType As String) As String Implements IEntity.GetMetadata
-        Return EntityData.Metadatas(metadataType)
+        Dim metadataValue As String = Nothing
+        If EntityData.Metadatas.TryGetValue(metadataType, metadataValue) Then
+            Return metadataValue
+        End If
+        Return Nothing
     End Function
 
     Public Function GetTag(tagType As String) As Boolean Implements IEntity.GetTag
