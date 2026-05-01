@@ -7,6 +7,10 @@
             HandleInvalidCommand(context)
             Return
         End If
+        If route.GetTag(Tags.IS_LOCKED) Then
+            context.Output($"{avatar.GetName()} cannot go that way for it is locked.")
+            Return
+        End If
         context.Output($"{avatar.GetName} goes {direction}.")
         avatar.Location = route.Destination
     End Sub

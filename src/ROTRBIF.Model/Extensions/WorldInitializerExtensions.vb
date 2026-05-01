@@ -6,15 +6,30 @@ Public Module WorldInitializerExtensions
     Public Sub Initialize(world As IWorld)
         world.Clear()
         Dim blueRoom = world.CreateLocation(AddressOf InitializeBlueRoom)
+        Dim nextRoom = world.CreateLocation(InitializeNextRoom(blueRoom))
     End Sub
+
+    Private Function InitializeNextRoom(blueRoom As ILocation) As Action(Of ILocation)
+        Return Sub(location)
+                   location.SetName("the next room")
+                   blueRoom.CreateRoute(
+                        Direction.North.GetName(),
+                        location,
+                        Sub(r)
+                            r.SetTag(Tags.IS_LOCKED)
+                        End Sub)
+                   location.CreateRoute(Direction.South.GetName(), blueRoom)
+               End Sub
+    End Function
 
     Private Sub InitializeBlueRoom(location As ILocation)
         location.SetName("the blue room")
         location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
-        location.CreateRoute(Direction.North.GetName(), location, AddressOf InitializeBlueRoomNorthDoor)
+        location.Inventory.CreateItem(AddressOf InitializeYlioppilaslakki)
     End Sub
 
-    Private Sub InitializeBlueRoomNorthDoor(route As IRoute)
+    Private Sub InitializeYlioppilaslakki(item As IItem)
+        item.SetName("ylioppilaslakki")
     End Sub
 
     Private Sub InitializeN00b(character As ICharacter)
