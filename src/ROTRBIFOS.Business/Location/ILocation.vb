@@ -10,4 +10,6 @@
     Sub RemoveCharacter(character As ICharacter)
     Function CreateFeature(Optional featureInitializer As Action(Of IFeature) = Nothing) As IFeature
     Sub AddFeature(feature As IFeature)
+    ReadOnly Property HasRoutes As Boolean
+    ReadOnly Property HasFeatures As Boolean
 End Interface

@@ -17,6 +17,18 @@ Friend Class Location
         End Get
     End Property
 
+    Public ReadOnly Property HasRoutes As Boolean Implements ILocation.HasRoutes
+        Get
+            Return EntityData.RouteIds.Count <> 0
+        End Get
+    End Property
+
+    Public ReadOnly Property HasFeatures As Boolean Implements ILocation.HasFeatures
+        Get
+            Return EntityData.FeatureIds.Count <> 0
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As LocationData
         Get
             Return worldData.Locations(LocationId)

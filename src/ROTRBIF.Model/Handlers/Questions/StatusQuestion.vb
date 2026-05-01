@@ -16,6 +16,12 @@
                 If location.HasItems() Then
                     x.Output($"{avatar.GetName()} sees things on the ground.")
                 End If
+                If location.HasRoutes Then
+                    x.Output($"{avatar.GetName()} sees exits.")
+                End If
+                If location.HasFeatures Then
+                    x.Output($"{avatar.GetName()} sees features.")
+                End If
             End Sub,
             AddressOf HandleInvalidCommand)
     End Sub
