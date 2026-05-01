@@ -10,8 +10,10 @@ Friend Class Character
     End Sub
 
     Friend Shared Function TryFind(worldData As WorldData, characterId As Guid?) As ICharacter
-        Return If(characterId.HasValue AndAlso worldData.Characters.ContainsKey(characterId.Value),
-            New Character(worldData, characterId.Value), Nothing)
+        Return If(
+            characterId.HasValue AndAlso worldData.Characters.ContainsKey(characterId.Value),
+            New Character(worldData, characterId.Value),
+            Nothing)
     End Function
 
     Public ReadOnly Property CharacterId As Guid Implements ICharacter.CharacterId

@@ -1,10 +1,12 @@
 ﻿Friend Module GroundQuestion
     Friend Sub Handle(context As IModelContext)
         context.TerminalDispatch(
-            Sub(x)
-                Dim avatar = x.World.Avatar
-                context.Output($"{avatar.GetName()} sees {avatar.Location.Inventory.GetInventoryText()} on the ground.")
-            End Sub,
+            AddressOf ShowGroundInventory,
             AddressOf HandleInvalidCommand)
+    End Sub
+
+    Private Sub ShowGroundInventory(context As IModelContext)
+        Dim avatar = context.World.Avatar
+        context.Output($"{avatar.GetName()} sees {avatar.Location.Inventory.GetInventoryText()} on the ground.")
     End Sub
 End Module

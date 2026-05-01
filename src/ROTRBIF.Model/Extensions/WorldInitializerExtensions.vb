@@ -11,6 +11,10 @@ Public Module WorldInitializerExtensions
     Private Sub InitializeBlueRoom(location As ILocation)
         location.SetName("the blue room")
         location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
+        location.CreateRoute(Direction.North.GetName(), location, AddressOf InitializeBlueRoomNorthDoor)
+    End Sub
+
+    Private Sub InitializeBlueRoomNorthDoor(route As IRoute)
     End Sub
 
     Private Sub InitializeN00b(character As ICharacter)
