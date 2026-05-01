@@ -12,4 +12,5 @@
     Sub AddFeature(feature As IFeature)
     ReadOnly Property HasRoutes As Boolean
     ReadOnly Property HasFeatures As Boolean
+    ReadOnly Property Features As IEnumerable(Of IFeature)
 End Interface

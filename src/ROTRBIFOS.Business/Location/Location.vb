@@ -29,6 +29,12 @@ Friend Class Location
         End Get
     End Property
 
+    Public ReadOnly Property Features As IEnumerable(Of IFeature) Implements ILocation.Features
+        Get
+            Return EntityData.FeatureIds.Select(Function(x) Feature.TryFind(worldData, x))
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As LocationData
         Get
             Return worldData.Locations(LocationId)

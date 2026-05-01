@@ -16,4 +16,18 @@ Friend Module LocationExtensions
                 Return $"{String.Join(", ", routes.Take(routes.Count - 1).Select(Function(y) y.Direction))} And {routes.Last.Direction}"
         End Select
     End Function
+    <Extension>
+    Friend Function GetFeaturesText(location As ILocation) As String
+        Dim features = location.Features
+        Select Case features.Count
+            Case 0
+                Return "nothing"
+            Case 1
+                Return features.Single.GetName
+            Case 2
+                Return $"{features.First.GetName} and {features.Last.GetName}"
+            Case Else
+                Return $"{String.Join(", ", features.Take(features.Count - 1).Select(Function(y) y.GetName))} And {features.Last.GetName}"
+        End Select
+    End Function
 End Module
