@@ -7,10 +7,5 @@
             HandleInvalidCommand(context)
             Return
         End If
-        If Not feature.HasTrigger(Triggers.SEARCH) Then
-            HandleInvalidCommand(context)
-            Return
-        End If
-        feature.GetTrigger(Triggers.SEARCH).Fire(context)
     End Sub
 End Module
