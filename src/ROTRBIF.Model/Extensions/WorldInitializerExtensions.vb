@@ -21,7 +21,12 @@ Public Module WorldInitializerExtensions
 
     Private Sub InitializeLoftCrate(feature As IFeature)
         feature.SetName("crate")
-        feature.CreateTrigger(Triggers.SEARCH)
+        feature.CreateTrigger(
+            Triggers.SEARCH,
+            Sub(t)
+                t.SetTriggerAction(TriggerActions.MESSAGE)
+                t.SetTriggerMessage("This is a message.")
+            End Sub)
     End Sub
 
     Private Function InitializeNextRoom(blueRoom As ILocation) As Action(Of ILocation)
