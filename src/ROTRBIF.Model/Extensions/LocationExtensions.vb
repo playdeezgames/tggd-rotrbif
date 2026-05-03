@@ -30,4 +30,8 @@ Friend Module LocationExtensions
                 Return $"{String.Join(", ", features.Take(features.Count - 1).Select(Function(y) y.GetName))} And {features.Last.GetName}"
         End Select
     End Function
+    <Extension>
+    Friend Function FindFeatureByName(location As ILocation, name As String) As IFeature
+        Return location.Features.FirstOrDefault(Function(x) x.GetName() = name)
+    End Function
 End Module

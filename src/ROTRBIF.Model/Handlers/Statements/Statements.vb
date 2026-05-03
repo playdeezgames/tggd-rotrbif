@@ -8,6 +8,7 @@
     Const TakeCommand = "Take"
     Const GoCommand = "Go"
     Const UnlockCommand = "Unlock"
+    Const SearchCommand = "Search"
 
     Private ReadOnly statementTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
         New Dictionary(Of String, Action(Of IModelContext)) From
@@ -20,7 +21,8 @@
             {DropCommand, AddressOf DropStatement.Handle},
             {TakeCommand, AddressOf TakeStatement.Handle},
             {GoCommand, AddressOf GoStatement.Handle},
-            {UnlockCommand, AddressOf UnlockStatement.Handle}
+            {UnlockCommand, AddressOf UnlockStatement.Handle},
+            {SearchCommand, AddressOf SearchStatement.Handle}
         }
 
     Friend Sub Handle(context As IModelContext)
