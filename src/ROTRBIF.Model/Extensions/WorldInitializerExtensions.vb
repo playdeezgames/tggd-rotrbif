@@ -23,10 +23,30 @@ Public Module WorldInitializerExtensions
         feature.SetName("crate")
         feature.CreateTrigger(
             Triggers.SEARCH,
-            Sub(t)
-                t.SetTriggerAction(TriggerActions.MESSAGE)
-                t.SetTriggerMessage("This is a message.")
-            End Sub)
+            AddressOf InitializeLoftCrateSearchTrigger)
+    End Sub
+
+    Private Sub InitializeLoftCrateSearchTrigger(trigger As ITrigger)
+        trigger.SetTriggerAction(TriggerActions.CHECK_TAG)
+        trigger.SetTriggerTag(Tags.HAS_SEARCHED)
+        trigger.CreateTrigger(Triggers.CONDITION_MET, AddressOf InitializeLoftCrateAlreadySearchedTrigger)
+        trigger.CreateTrigger(Triggers.CONDITION_UNMET, AddressOf InitializeLoftCrateNotSearchedTrigger)
+    End Sub
+
+    Private Sub InitializeLoftCrateNotSearchedTrigger(trigger As ITrigger)
+        trigger.SetTriggerAction(TriggerActions.MESSAGE)
+        trigger.SetTriggerMessage("The crate has not been searched.")
+        trigger.CreateTrigger(Triggers.NEXT, AddressOf InitializeLoftCrateSetSearchTagTrigger)
+    End Sub
+
+    Private Sub InitializeLoftCrateSetSearchTagTrigger(trigger As ITrigger)
+        trigger.SetTriggerAction(TriggerActions.SET_TAG)
+        trigger.SetTriggerTag(Tags.HAS_SEARCHED)
+    End Sub
+
+    Private Sub InitializeLoftCrateAlreadySearchedTrigger(trigger As ITrigger)
+        trigger.SetTriggerAction(TriggerActions.MESSAGE)
+        trigger.SetTriggerMessage("The crate has been searched.")
     End Sub
 
     Private Function InitializeNextRoom(blueRoom As ILocation) As Action(Of ILocation)

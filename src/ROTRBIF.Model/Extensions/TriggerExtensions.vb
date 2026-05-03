@@ -5,7 +5,9 @@ Friend Module TriggerExtensions
     Private ReadOnly triggerActionTable As IReadOnlyDictionary(Of String, Func(Of ITrigger, IModelContext, ITrigger)) =
         New Dictionary(Of String, Func(Of ITrigger, IModelContext, ITrigger)) From
         {
-            {TriggerActions.MESSAGE, AddressOf MessageTriggerAction.Fire}
+            {TriggerActions.MESSAGE, AddressOf MessageTriggerAction.Fire},
+            {TriggerActions.CHECK_TAG, AddressOf CheckTagTriggerAction.Fire},
+            {TriggerActions.SET_TAG, AddressOf SetTagTriggerAction.Fire}
         }
     <Extension>
     Friend Sub Fire(trigger As ITrigger, context As IModelContext)
@@ -35,5 +37,13 @@ Friend Module TriggerExtensions
             Return Nothing
         End If
         Return trigger.GetTrigger(Triggers.NEXT)
+    End Function
+    <Extension>
+    Friend Sub SetTriggerTag(trigger As ITrigger, tagType As String)
+        trigger.SetMetadata(Metadatas.TRIGGER_TAG_TYPE, tagType)
+    End Sub
+    <Extension>
+    Friend Function GetTriggerTag(trigger As ITrigger) As String
+        Return trigger.GetMetadata(Metadatas.TRIGGER_TAG_TYPE)
     End Function
 End Module
