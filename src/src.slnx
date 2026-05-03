@@ -4,6 +4,7 @@
   </Folder>
   <Folder Name="/_STUFF/">
     <File Path="../.gitignore" />
+    <File Path="../README.md" />
     <File Path="../shippit.sh" />
   </Folder>
   <Project Path="ROTRBIF.Model/ROTRBIF.Model.vbproj" Id="1102e020-6ccd-460a-b6a9-4e27d5166bc8" />
