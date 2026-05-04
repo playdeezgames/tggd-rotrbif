@@ -2,12 +2,16 @@
 
 Friend Module BlueRoomInitializer
 
-    Friend Sub Initialize(location As ILocation)
-        location.SetName(Names.THE_BLUE_ROOM)
-        location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
-        location.Inventory.CreateItem(AddressOf InitializeYlioppilaslakki)
-        location.CreateFeature(AddressOf InitializeBed)
-    End Sub
+    Friend Function Initialize(exitDestination As ILocation) As Action(Of ILocation)
+        Return Sub(location)
+                   location.SetName(Names.THE_BLUE_ROOM)
+                   location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
+                   location.Inventory.CreateItem(AddressOf InitializeYlioppilaslakki)
+                   location.CreateFeature(AddressOf InitializeBed)
+                   location.CreateRoute(Direction.Out.GetName, exitDestination)
+                   exitDestination.CreateRoute(Direction.In.GetName, location)
+               End Sub
+    End Function
 
     Private Sub InitializeBed(feature As IFeature)
         feature.SetName(Names.BED)

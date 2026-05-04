@@ -6,4 +6,7 @@ Public Module RNG
                              Optional random As Random = Nothing) As Integer
         Return If(random, RNG.random).Next(minimum, maximum + 1)
     End Function
+    Public Function FromList(Of TItem)(source As IList(Of TItem)) As TItem
+        Return source(FromRange(0, source.Count - 1))
+    End Function
 End Module
