@@ -10,4 +10,12 @@ Public Module EntityExtensions
     Function GetName(character As IEntity) As String
         Return character.GetMetadata(Metadatas.NAME)
     End Function
+    <Extension>
+    Function HasJools(entity As IEntity) As Boolean
+        Return entity.HasStatistic(Statistics.JOOLS) AndAlso entity.GetStatistic(Statistics.JOOLS) > 0
+    End Function
+    <Extension>
+    Function GetJools(entity As IEntity) As Integer
+        Return entity.GetStatistic(Statistics.JOOLS)
+    End Function
 End Module

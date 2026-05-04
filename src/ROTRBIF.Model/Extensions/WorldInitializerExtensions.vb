@@ -12,7 +12,7 @@ Public Module WorldInitializerExtensions
 
     Private Function InitializeLoft(blueRoom As ILocation) As Action(Of ILocation)
         Return Sub(location)
-                   location.SetName("the loft")
+                   location.SetName(Names.THE_LOFT)
                    location.CreateRoute("down", blueRoom)
                    blueRoom.CreateRoute("up", location)
                    location.CreateFeature(AddressOf InitializeLoftCrate)
@@ -20,12 +20,12 @@ Public Module WorldInitializerExtensions
     End Function
 
     Private Sub InitializeLoftCrate(feature As IFeature)
-        feature.SetName("crate")
+        feature.SetName(Names.CRATE)
     End Sub
 
     Private Function InitializeNextRoom(blueRoom As ILocation) As Action(Of ILocation)
         Return Sub(location)
-                   location.SetName("the next room")
+                   location.SetName(Names.THE_NEXT_ROOM)
                    blueRoom.CreateRoute(
                         Direction.North.GetName(),
                         location,
@@ -38,20 +38,21 @@ Public Module WorldInitializerExtensions
     End Function
 
     Private Sub InitializeBlueRoom(location As ILocation)
-        location.SetName("the blue room")
+        location.SetName(Names.THE_BLUE_ROOM)
         location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
         location.Inventory.CreateItem(AddressOf InitializeYlioppilaslakki)
     End Sub
 
     Private Sub InitializeYlioppilaslakki(item As IItem)
-        item.SetName("ylioppilaslakki")
+        item.SetName(Names.YLIOPPILASLAKKI)
     End Sub
 
     Private Sub InitializeN00b(character As ICharacter)
-        character.SetName("N00b")
+        character.SetName(Names.N00B)
         character.SetAlive()
         character.SetFacing(Direction.North)
         character.SetCheckCount(0)
         character.SetTag(Tags.HAS_ASS_KEY)
+        character.SetStatistic(Statistics.JOOLS, 0)
     End Sub
 End Module

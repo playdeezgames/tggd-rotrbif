@@ -41,6 +41,15 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
         EntityData.Tags.Remove(tagType)
     End Sub
 
+    Public Function ChangeStatistic(statisticType As String, delta As Integer) As Integer Implements IEntity.ChangeStatistic
+        SetStatistic(statisticType, GetStatistic(statisticType) + delta)
+        Return GetStatistic(statisticType)
+    End Function
+
+    Public Function HasStatistic(statisticType As String) As Boolean Implements IEntity.HasStatistic
+        Return EntityData.Statistics.ContainsKey(statisticType)
+    End Function
+
     Protected MustOverride ReadOnly Property EntityData As TEntity
 
     Public ReadOnly Property World As IWorld Implements IEntity.World

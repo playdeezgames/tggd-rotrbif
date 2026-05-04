@@ -7,4 +7,6 @@
     Function GetStatistic(statisticType As String) As Integer
     Sub ClearTag(tagType As String)
     ReadOnly Property World As IWorld
+    Function ChangeStatistic(statisticType As String, delta As Integer) As Integer
+    Function HasStatistic(statisticType As String) As Boolean
 End Interface
