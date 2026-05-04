@@ -6,6 +6,12 @@ Friend Module BlueRoomInitializer
         location.SetName(Names.THE_BLUE_ROOM)
         location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
         location.Inventory.CreateItem(AddressOf InitializeYlioppilaslakki)
+        location.CreateFeature(AddressOf InitializeBed)
+    End Sub
+
+    Private Sub InitializeBed(feature As IFeature)
+        feature.SetName(Names.BED)
+        feature.SetObjectIdentifier(ObjectIdentifier.BED)
     End Sub
 
     Private Sub InitializeYlioppilaslakki(item As IItem)

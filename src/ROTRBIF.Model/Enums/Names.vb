@@ -6,4 +6,5 @@
     Friend ReadOnly YLIOPPILASLAKKI As String = "ylioppilaslakki"
     Friend ReadOnly N00B As String = "N00b"
     Friend ReadOnly ASS_KEY As String = "ass key"
+    Friend ReadOnly BED As String = "bed"
 End Module
