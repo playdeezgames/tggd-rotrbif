@@ -54,4 +54,19 @@ Public Module CharacterExtensions
     Function HasAssKey(character As ICharacter) As Boolean
         Return character.GetTag(Tags.HAS_ASS_KEY)
     End Function
+    <Extension>
+    Sub SetFeature(character As ICharacter, feature As IFeature)
+        character.SetYoke(Yokes.FEATURE, feature.FeatureId)
+    End Sub
+    <Extension>
+    Sub ClearFeature(character As ICharacter)
+        character.ClearYoke(Yokes.FEATURE)
+    End Sub
+    <Extension>
+    Function GetFeature(character As ICharacter) As IFeature
+        If character.HasYoke(Yokes.FEATURE) Then
+            Return character.World.GetFeature(character.GetYoke(Yokes.FEATURE))
+        End If
+        Return Nothing
+    End Function
 End Module

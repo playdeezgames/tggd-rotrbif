@@ -50,6 +50,22 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
         Return EntityData.Statistics.ContainsKey(statisticType)
     End Function
 
+    Public Sub SetYoke(yokeType As String, identifier As Guid) Implements IEntity.SetYoke
+        EntityData.Yokes(yokeType) = identifier
+    End Sub
+
+    Public Function HasYoke(yokeType As String) As Boolean Implements IEntity.HasYoke
+        Return EntityData.Yokes.ContainsKey(yokeType)
+    End Function
+
+    Public Function GetYoke(yokeType As String) As Guid Implements IEntity.GetYoke
+        Return EntityData.Yokes(yokeType)
+    End Function
+
+    Public Sub ClearYoke(yokeType As String) Implements IEntity.ClearYoke
+        EntityData.Yokes.Remove(yokeType)
+    End Sub
+
     Protected MustOverride ReadOnly Property EntityData As TEntity
 
     Public ReadOnly Property World As IWorld Implements IEntity.World

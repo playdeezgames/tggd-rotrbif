@@ -21,6 +21,7 @@ Public Module WorldInitializerExtensions
 
     Private Sub InitializeLoftCrate(feature As IFeature)
         feature.SetName(Names.CRATE)
+        feature.SetObjectIdentifier(ObjectIdentifier.LOFT_CRATE)
     End Sub
 
     Private Function InitializeNextRoom(blueRoom As ILocation) As Action(Of ILocation)

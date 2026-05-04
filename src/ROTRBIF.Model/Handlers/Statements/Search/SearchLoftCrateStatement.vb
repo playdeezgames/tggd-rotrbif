@@ -1,8 +1,8 @@
-﻿Friend Module SearchCrateStatement
+﻿Friend Module SearchLoftCrateStatement
     Friend Sub Handle(context As IModelContext)
         Const JOOLS_COUNT = 5
         Dim avatar = context.World.Avatar
-        Dim crate = avatar.Location.FindFeatureByName(Names.CRATE)
+        Dim crate = avatar.GetFeature()
         If crate.GetTag(Tags.SEARCHED) Then
             context.Output($"{avatar.GetName} has already searched that.")
         Else

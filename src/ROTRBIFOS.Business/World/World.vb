@@ -34,4 +34,8 @@ Public Class World
         locationInitializer?.Invoke(location)
         Return location
     End Function
+
+    Public Function GetFeature(featureId As Guid) As IFeature Implements IWorld.GetFeature
+        Return Feature.TryFind(worldData, featureId)
+    End Function
 End Class

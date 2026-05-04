@@ -18,4 +18,15 @@ Public Module EntityExtensions
     Function GetJools(entity As IEntity) As Integer
         Return entity.GetStatistic(Statistics.JOOLS)
     End Function
+    <Extension>
+    Sub SetObjectIdentifier(entity As IEntity, objectIdentifier As ObjectIdentifier)
+        entity.SetStatistic(Statistics.OBJECT_IDENTIFIER, CInt(objectIdentifier))
+    End Sub
+    <Extension>
+    Function GetObjectIdentifier(entity As IEntity) As ObjectIdentifier?
+        If entity.HasStatistic(Statistics.OBJECT_IDENTIFIER) Then
+            Return CType(entity.GetStatistic(Statistics.OBJECT_IDENTIFIER), ObjectIdentifier)
+        End If
+        Return Nothing
+    End Function
 End Module
