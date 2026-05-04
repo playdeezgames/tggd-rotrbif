@@ -5,6 +5,8 @@ Public Enum Direction
     East
     South
     West
+    [In]
+    Out
 End Enum
 
 Public Module DirectionExtensions
@@ -14,7 +16,9 @@ Public Module DirectionExtensions
             {Direction.North, "north"},
             {Direction.East, "east"},
             {Direction.South, "south"},
-            {Direction.West, "west"}
+            {Direction.West, "west"},
+            {Direction.In, "in"},
+            {Direction.Out, "out"}
         }
     <Extension>
     Function GetName(direction As Direction) As String
