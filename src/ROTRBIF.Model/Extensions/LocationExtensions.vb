@@ -3,46 +3,29 @@ Imports ROTRBIFOS.Business
 
 Friend Module LocationExtensions
     <Extension>
-    Friend Function GetExitsText(location As ILocation) As String
-        Dim routes = location.Routes
-        Select Case routes.Count
+    Private Function GetText(Of TItem)(items As IEnumerable(Of TItem), toText As Func(Of TItem, String), noneText As String) As String
+        Select Case items.Count
             Case 0
-                Return "nowhere"
+                Return noneText
             Case 1
-                Return routes.Single.Direction
+                Return toText(items.Single)
             Case 2
-                Return $"{routes.First.Direction} and {routes.Last.Direction}"
+                Return $"{toText(items.First)} and {toText(items.Last)}"
             Case Else
-                Return $"{String.Join(", ", routes.Take(routes.Count - 1).Select(Function(y) y.Direction))} And {routes.Last.Direction}"
+                Return $"{String.Join(", ", items.Take(items.Count - 1).Select(toText))} And {toText(items.Last)}"
         End Select
+    End Function
+    <Extension>
+    Friend Function GetExitsText(location As ILocation) As String
+        Return location.Routes.GetText(Function(x) x.Direction, "nowhere")
     End Function
     <Extension>
     Friend Function GetFeaturesText(location As ILocation) As String
-        Dim features = location.Features
-        Select Case features.Count
-            Case 0
-                Return "nothing"
-            Case 1
-                Return features.Single.GetName
-            Case 2
-                Return $"{features.First.GetName} and {features.Last.GetName}"
-            Case Else
-                Return $"{String.Join(", ", features.Take(features.Count - 1).Select(Function(y) y.GetName))} And {features.Last.GetName}"
-        End Select
+        Return location.Features.GetText(Function(x) x.GetName(), "nothing")
     End Function
     <Extension>
     Friend Function GetOthersText(location As ILocation, character As ICharacter) As String
-        Dim others = location.GetOthers(character)
-        Select Case others.Count
-            Case 0
-                Return "nobody"
-            Case 1
-                Return others.Single.GetName
-            Case 2
-                Return $"{others.First.GetName} and {others.Last.GetName}"
-            Case Else
-                Return $"{String.Join(", ", others.Take(others.Count - 1).Select(Function(y) y.GetName))} And {others.Last.GetName}"
-        End Select
+        Return location.GetOthers(character).GetText(Function(x) x.GetName(), "nobody")
     End Function
     <Extension>
     Friend Function FindFeatureByName(location As ILocation, name As String) As IFeature
