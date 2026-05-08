@@ -1,8 +1,17 @@
 ﻿Imports ROTRBIFOS.Business
+Imports TGGD.Business
 
 Friend Module BlueRoomInitializer
 
-    Friend Function Initialize(exitDestination As ILocation) As Action(Of ILocation)
+    Friend Sub Initialize(town As List(Of ILocation))
+        Dim townLocation = RNG.FromList(town)
+        Dim world = townLocation.World
+        town.Remove(townLocation)
+        Dim blueRoom = world.CreateLocation(BlueRoomInitializer.InitializeRoom(townLocation))
+        world.CreateLocation(LoftInitializer.Initialize(blueRoom))
+    End Sub
+
+    Private Function InitializeRoom(exitDestination As ILocation) As Action(Of ILocation)
         Return Sub(location)
                    location.SetName(Names.THE_BLUE_ROOM)
                    location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
