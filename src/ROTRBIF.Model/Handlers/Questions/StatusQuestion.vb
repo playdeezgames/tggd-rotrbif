@@ -22,6 +22,9 @@
                 If location.HasFeatures Then
                     x.Output($"{avatar.GetName()} sees features.")
                 End If
+                If location.HasOthers(avatar) Then
+                    x.Output($"{avatar.GetName()} sees others.")
+                End If
                 If avatar.HasJools() Then
                     x.Output($"{avatar.GetName} has {avatar.GetJools} jools.")
                 End If

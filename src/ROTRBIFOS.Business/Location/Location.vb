@@ -35,6 +35,12 @@ Friend Class Location
         End Get
     End Property
 
+    Public ReadOnly Property Characters As IEnumerable(Of ICharacter) Implements ILocation.Characters
+        Get
+            Return EntityData.CharacterIds.Select(Function(x) Character.TryFind(worldData, x))
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As LocationData
         Get
             Return worldData.Locations(LocationId)
@@ -106,5 +112,9 @@ Friend Class Location
         AddFeature(feature)
         featureInitializer?.Invoke(feature)
         Return feature
+    End Function
+
+    Public Function HasOthers(character As ICharacter) As Boolean Implements ILocation.HasOthers
+        Return Characters.Any(Function(x) x.CharacterId <> character.CharacterId)
     End Function
 End Class

@@ -13,4 +13,6 @@
     ReadOnly Property HasRoutes As Boolean
     ReadOnly Property HasFeatures As Boolean
     ReadOnly Property Features As IEnumerable(Of IFeature)
+    Function HasOthers(character As ICharacter) As Boolean
+    ReadOnly Property Characters As IEnumerable(Of ICharacter)
 End Interface
