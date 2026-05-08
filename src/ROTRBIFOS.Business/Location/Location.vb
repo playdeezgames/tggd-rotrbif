@@ -117,4 +117,11 @@ Friend Class Location
     Public Function HasOthers(character As ICharacter) As Boolean Implements ILocation.HasOthers
         Return Characters.Any(Function(x) x.CharacterId <> character.CharacterId)
     End Function
+
+    Public Function GetOthers(character As ICharacter) As IEnumerable(Of ICharacter) Implements ILocation.GetOthers
+        Return EntityData.
+            CharacterIds.
+            Where(Function(x) x <> character.CharacterId).
+            Select(Function(x) Business.Character.TryFind(worldData, x))
+    End Function
 End Class

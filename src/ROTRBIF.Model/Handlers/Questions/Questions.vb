@@ -4,6 +4,7 @@
     Const GroundCommand = "Ground"
     Const ExitsCommand = "Exits"
     Const FeaturesCommand = "Features"
+    Const OthersCommand = "Others"
 
     Private ReadOnly questionTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
         New Dictionary(Of String, Action(Of IModelContext)) From
@@ -12,7 +13,8 @@
             {InventoryCommand, AddressOf InventoryQuestion.Handle},
             {GroundCommand, AddressOf GroundQuestion.Handle},
             {ExitsCommand, AddressOf ExitsQuestion.Handle},
-            {FeaturesCommand, AddressOf FeaturesQuestion.Handle}
+            {FeaturesCommand, AddressOf FeaturesQuestion.Handle},
+            {OthersCommand, AddressOf OthersQuestion.Handle}
         }
 
     Friend Sub Handle(context As IModelContext)

@@ -31,6 +31,20 @@ Friend Module LocationExtensions
         End Select
     End Function
     <Extension>
+    Friend Function GetOthersText(location As ILocation, character As ICharacter) As String
+        Dim others = location.GetOthers(character)
+        Select Case others.Count
+            Case 0
+                Return "nobody"
+            Case 1
+                Return others.Single.GetName
+            Case 2
+                Return $"{others.First.GetName} and {others.Last.GetName}"
+            Case Else
+                Return $"{String.Join(", ", others.Take(others.Count - 1).Select(Function(y) y.GetName))} And {others.Last.GetName}"
+        End Select
+    End Function
+    <Extension>
     Friend Function FindFeatureByName(location As ILocation, name As String) As IFeature
         Return location.Features.FirstOrDefault(Function(x) x.GetName() = name)
     End Function
