@@ -31,4 +31,8 @@ Friend Module LocationExtensions
     Friend Function FindFeatureByName(location As ILocation, name As String) As IFeature
         Return location.Features.FirstOrDefault(Function(x) x.GetName() = name)
     End Function
+    <Extension>
+    Friend Function FindOtherByName(location As ILocation, character As ICharacter, name As String) As ICharacter
+        Return location.GetOthers(character).FirstOrDefault(Function(x) x.GetName() = name)
+    End Function
 End Module

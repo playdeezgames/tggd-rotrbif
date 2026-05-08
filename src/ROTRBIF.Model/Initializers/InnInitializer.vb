@@ -20,5 +20,6 @@ Friend Module InnInitializer
 
     Private Sub InitializeGorachan(character As ICharacter)
         character.SetName(Names.GORACHAN)
+        character.SetObjectIdentifier(ObjectIdentifier.GORACHAN)
     End Sub
 End Module
