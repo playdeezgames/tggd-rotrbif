@@ -1,6 +1,8 @@
 ﻿Friend Module Names
     Friend ReadOnly ASS_KEY As String = "ass key"
     Friend ReadOnly BED As String = "bed"
+    Friend ReadOnly CELLAR As String = "cellar"
+    Friend ReadOnly CELLAR_KEY As String = "cellar key"
     Friend ReadOnly CRATE As String = "crate"
     Friend ReadOnly GORACHAN As String = "Gorachan"
     Friend ReadOnly JUSDATIP_INN As String = "Jusdatip Inn"

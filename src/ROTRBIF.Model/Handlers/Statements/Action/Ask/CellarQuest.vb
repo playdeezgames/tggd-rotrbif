@@ -23,8 +23,9 @@ Friend Module CellarQuest
     End Sub
 
     Private Sub CreateCellarKey(item As IItem)
-        item.SetName("cellar key")
+        item.SetName(Names.CELLAR_KEY)
         item.SetObjectIdentifier(ObjectIdentifier.CELLAR_KEY)
+        item.SetMetadata(Metadatas.KEY_TYPE, KeyTypes.CELLAR_KEY)
     End Sub
 
     Private Sub ShowQuestState(context As IModelContext, interrogator As ICharacter, deponent As ICharacter)

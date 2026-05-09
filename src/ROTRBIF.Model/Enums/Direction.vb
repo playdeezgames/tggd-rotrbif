@@ -7,6 +7,8 @@ Public Enum Direction
     West
     [In]
     Out
+    Up
+    Down
 End Enum
 
 Public Module DirectionExtensions
@@ -18,7 +20,9 @@ Public Module DirectionExtensions
             {Direction.South, "south"},
             {Direction.West, "west"},
             {Direction.In, "in"},
-            {Direction.Out, "out"}
+            {Direction.Out, "out"},
+            {Direction.Up, "up"},
+            {Direction.Down, "down"}
         }
     Private ReadOnly deltaXTable As IReadOnlyDictionary(Of Direction, Integer) =
         New Dictionary(Of Direction, Integer) From
@@ -28,7 +32,9 @@ Public Module DirectionExtensions
             {Direction.South, 0},
             {Direction.West, -1},
             {Direction.In, 0},
-            {Direction.Out, 0}
+            {Direction.Out, 0},
+            {Direction.Up, 0},
+            {Direction.Down, 0}
         }
     Private ReadOnly deltaYTable As IReadOnlyDictionary(Of Direction, Integer) =
         New Dictionary(Of Direction, Integer) From
@@ -38,7 +44,9 @@ Public Module DirectionExtensions
             {Direction.South, 1},
             {Direction.West, 0},
             {Direction.In, 0},
-            {Direction.Out, 0}
+            {Direction.Out, 0},
+            {Direction.Up, 0},
+            {Direction.Down, 0}
         }
     <Extension>
     Function GetName(direction As Direction) As String
