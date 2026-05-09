@@ -2,4 +2,5 @@
     LOFT_CRATE
     BED
     GORACHAN
+    CELLAR_KEY
 End Enum

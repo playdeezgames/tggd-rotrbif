@@ -4,12 +4,8 @@ Friend Module AskAboutWorkTopic
     Private ReadOnly objectTable As IReadOnlyDictionary(Of ObjectIdentifier, Action(Of IModelContext, ICharacter, ICharacter)) =
         New Dictionary(Of ObjectIdentifier, Action(Of IModelContext, ICharacter, ICharacter)) From
         {
-            {ObjectIdentifier.GORACHAN, AddressOf AskGorachanAboutWork}
+            {ObjectIdentifier.GORACHAN, AddressOf CellarQuest.AskGorachanAboutWork}
         }
-
-    Private Sub AskGorachanAboutWork(context As IModelContext, interrogator As ICharacter, deponent As ICharacter)
-        context.Output($"{deponent.GetName} says ""Go kill the rats in the cellar.""")
-    End Sub
 
     Friend Sub Handle(
                      context As IModelContext,
