@@ -16,12 +16,16 @@ Friend Module InnInitializer
                    location.CreateRoute(Direction.Out.GetName, exitDestination)
                    exitDestination.CreateRoute(Direction.In.GetName, location)
                    location.World.CreateLocation(CreateCellar(location))
+#If DEBUG Then
+                   location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
+#End If
                End Sub
     End Function
 
     Private Function CreateCellar(inn As ILocation) As Action(Of ILocation)
         Return Sub(cellar)
                    cellar.SetName(Names.CELLAR)
+                   cellar.SetObjectIdentifier(ObjectIdentifier.CELLAR)
                    cellar.CreateRoute(Direction.Up.GetName, inn)
                    inn.CreateRoute(Direction.Down.GetName, cellar, AddressOf CreateCellarDoor)
                End Sub

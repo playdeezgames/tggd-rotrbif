@@ -14,7 +14,9 @@ Friend Module BlueRoomInitializer
     Private Function InitializeRoom(exitDestination As ILocation) As Action(Of ILocation)
         Return Sub(location)
                    location.SetName(Names.THE_BLUE_ROOM)
+#If Not DEBUG Then
                    location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
+#End If
                    location.Inventory.CreateItem(AddressOf InitializeYlioppilaslakki)
                    location.CreateFeature(AddressOf InitializeBed)
                    location.CreateRoute(Direction.Out.GetName, exitDestination)
@@ -31,7 +33,7 @@ Friend Module BlueRoomInitializer
         item.SetName(Names.YLIOPPILASLAKKI)
     End Sub
 
-    Private Sub InitializeN00b(character As ICharacter)
+    Friend Sub InitializeN00b(character As ICharacter)
         character.SetName(Names.N00B)
         character.SetAlive()
         character.SetFacing(Direction.North)

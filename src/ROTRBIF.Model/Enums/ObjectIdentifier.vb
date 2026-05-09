@@ -1,6 +1,7 @@
 ﻿Public Enum ObjectIdentifier
-    LOFT_CRATE
     BED
-    GORACHAN
+    CELLAR
     CELLAR_KEY
+    GORACHAN
+    LOFT_CRATE
 End Enum
