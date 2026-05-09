@@ -7,6 +7,7 @@
     Friend ReadOnly GORACHAN As String = "Gorachan"
     Friend ReadOnly JUSDATIP_INN As String = "Jusdatip Inn"
     Friend ReadOnly N00B As String = "N00b"
+    Friend ReadOnly RAT As String = "rat"
     Friend ReadOnly RUSTY_DAGGER As String = "rusty dagger"
     Friend ReadOnly THE_BLUE_ROOM As String = "the blue room"
     Friend ReadOnly THE_LOFT As String = "the loft"
