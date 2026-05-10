@@ -102,6 +102,11 @@ Public Module CharacterExtensions
         If character.IsAvatar Then
             Return
         End If
+        Dim locationInventory = character.Location.Inventory
+        For Each item In character.Inventory.Items
+            item.Inventory = locationInventory
+            locationInventory.AddItem(item)
+        Next
         character.Destroy()
     End Sub
     <Extension>
