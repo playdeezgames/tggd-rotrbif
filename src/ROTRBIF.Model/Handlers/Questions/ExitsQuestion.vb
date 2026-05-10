@@ -1,6 +1,6 @@
 ﻿Friend Module ExitsQuestion
     Friend Sub Handle(context As IModelContext)
-        context.TerminalDispatch(AddressOf ShowExits,
+        context.TerminalDispatchAlive(AddressOf ShowExits,
                                 AddressOf HandleInvalidCommand)
     End Sub
 

@@ -35,6 +35,10 @@ Friend Module SearchStatement
 
     Friend Sub Handle(context As IModelContext)
         Dim avatar = context.World.Avatar
+        If avatar.IsDead Then
+            HandleInvalidCommand(context)
+            Return
+        End If
         Dim searchTarget = context.ReadRemainingTokens()
         If HandleSearchFeature(context, avatar, searchTarget) Then
         ElseIf HandleSearchLocation(context, avatar, searchTarget) Then

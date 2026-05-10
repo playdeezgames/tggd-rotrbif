@@ -1,12 +1,15 @@
 ﻿Friend Module TakeStatement
     Friend Sub Handle(context As IModelContext)
+        Dim avatar = context.World.Avatar
+        If avatar.IsDead Then
+            HandleInvalidCommand(context)
+            Return
+        End If
         Dim itemName = context.ReadRemainingTokens()
         If String.IsNullOrWhiteSpace(itemName) Then
             HandleInvalidCommand(context)
             Return
         End If
-        Dim avatar = context.World.Avatar
-        'You can't reach the ground from this height.
         If Not avatar.GetTag(Tags.BENT_OVER) Then
             context.Output($"{avatar.GetName} cannot reach the ground from this height.")
             Return

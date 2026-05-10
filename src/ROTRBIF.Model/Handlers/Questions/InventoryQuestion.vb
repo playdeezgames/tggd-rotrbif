@@ -1,6 +1,6 @@
 ﻿Friend Module InventoryQuestion
     Friend Sub Handle(context As IModelContext)
-        context.TerminalDispatch(
+        context.TerminalDispatchAlive(
             AddressOf ShowInventory,
             AddressOf HandleInvalidCommand)
     End Sub

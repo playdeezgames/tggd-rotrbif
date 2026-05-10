@@ -41,6 +41,6 @@ Friend Module CheckStatement
     End Sub
 
     Friend Sub Handle(context As IModelContext)
-        context.Dispatch(checkTable, AddressOf HandleInvalidCommand)
+        context.DispatchAlive(checkTable, AddressOf HandleInvalidCommand)
     End Sub
 End Module

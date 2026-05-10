@@ -10,6 +10,10 @@ Friend Module AskStatement
         }
     Friend Sub Handle(context As IModelContext)
         Dim avatar = context.World.Avatar
+        If avatar.IsDead Then
+            HandleInvalidCommand(context)
+            Return
+        End If
         If Not context.HasTokens Then
             HandleInvalidCommand(context)
             Return

@@ -22,5 +22,11 @@
         character.SetStatistic(Statistics.DEFEND_DICE, 1)
         character.SetStatistic(Statistics.DEFEND_LIMIT, 1)
         character.SetTag(Tags.ENEMY)
+        character.Inventory.CreateItem(AddressOf CreateRatTail)
+    End Sub
+
+    Private Sub CreateRatTail(item As ROTRBIFOS.Business.IItem)
+        item.SetName(Names.RAT_TAIL)
+        item.SetObjectIdentifier(ObjectIdentifier.RAT_TAIL)
     End Sub
 End Module

@@ -35,7 +35,6 @@ Friend Module BlueRoomInitializer
 
     Friend Sub InitializeN00b(character As ICharacter)
         character.SetName(Names.N00B)
-        character.SetAlive()
         character.SetFacing(Direction.North)
         character.SetCheckCount(0)
         character.SetTag(Tags.HAS_ASS_KEY)

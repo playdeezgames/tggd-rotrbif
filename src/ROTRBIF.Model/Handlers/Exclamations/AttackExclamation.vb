@@ -2,8 +2,12 @@
 
 Friend Module AttackExclamation
     Friend Sub Handle(context As IModelContext)
-        Dim defenderName = context.ReadRemainingTokens
         Dim avatar = context.World.Avatar
+        If avatar.IsDead Then
+            HandleInvalidCommand(context)
+            Return
+        End If
+        Dim defenderName = context.ReadRemainingTokens
         Dim defender = avatar.Location.GetOthers(avatar).FirstOrDefault(Function(x) x.GetName = defenderName)
         If defender Is Nothing Then
             HandleInvalidCommand(context)

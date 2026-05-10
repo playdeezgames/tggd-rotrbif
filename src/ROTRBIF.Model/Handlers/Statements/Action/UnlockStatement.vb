@@ -1,7 +1,11 @@
 ﻿Friend Module UnlockStatement
     Friend Sub Handle(context As IModelContext)
-        Dim direction = context.ReadRemainingTokens()
         Dim avatar = context.World.Avatar
+        If avatar.IsDead Then
+            HandleInvalidCommand(context)
+            Return
+        End If
+        Dim direction = context.ReadRemainingTokens()
         Dim route = avatar.Location.GetRoute(direction)
         If route Is Nothing Then
             HandleInvalidCommand(context)

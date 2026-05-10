@@ -1,6 +1,6 @@
 ﻿Friend Module GroundQuestion
     Friend Sub Handle(context As IModelContext)
-        context.TerminalDispatch(
+        context.TerminalDispatchAlive(
             AddressOf ShowGroundInventory,
             AddressOf HandleInvalidCommand)
     End Sub

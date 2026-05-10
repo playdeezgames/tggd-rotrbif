@@ -13,4 +13,5 @@
     Friend ReadOnly THE_LOFT As String = "the loft"
     Friend ReadOnly THE_NEXT_ROOM As String = "the next room"
     Friend ReadOnly YLIOPPILASLAKKI As String = "ylioppilaslakki"
+    Friend ReadOnly RAT_TAIL As String = "rat tail"
 End Module

@@ -1,6 +1,6 @@
 ﻿Friend Module OthersQuestion
     Friend Sub Handle(context As IModelContext)
-        context.TerminalDispatch(AddressOf ShowOthers, AddressOf HandleInvalidCommand)
+        context.TerminalDispatchAlive(AddressOf ShowOthers, AddressOf HandleInvalidCommand)
     End Sub
 
     Private Sub ShowOthers(context As IModelContext)

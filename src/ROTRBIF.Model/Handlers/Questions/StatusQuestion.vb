@@ -4,6 +4,9 @@
             Sub(x)
                 Dim avatar = x.World.Avatar
                 x.Output($"{avatar.GetName()} is {avatar.GetAliveStatus()}.")
+                If avatar.IsDead Then
+                    Return
+                End If
                 x.Output($"{avatar.GetName()} is facing {avatar.GetFacing().GetName()}.")
                 If avatar.IsBentOver Then
                     x.Output($"{avatar.GetName()} is bent over.")

@@ -1,6 +1,6 @@
 ﻿Friend Module FeaturesQuestion
     Friend Sub Handle(context As IModelContext)
-        context.TerminalDispatch(AddressOf ShowFeatures, AddressOf HandleInvalidCommand)
+        context.TerminalDispatchAlive(AddressOf ShowFeatures, AddressOf HandleInvalidCommand)
     End Sub
 
     Private Sub ShowFeatures(context As IModelContext)

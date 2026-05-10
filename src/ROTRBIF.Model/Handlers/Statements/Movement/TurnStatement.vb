@@ -13,7 +13,7 @@
         }
 
     Friend Sub Handle(context As IModelContext)
-        context.Dispatch(turnTable, AddressOf HandleInvalidCommand)
+        context.DispatchAlive(turnTable, AddressOf HandleInvalidCommand)
     End Sub
 
     Private Function DoTurn(turn As Turn) As Action(Of IModelContext)

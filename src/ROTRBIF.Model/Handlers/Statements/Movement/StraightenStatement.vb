@@ -22,6 +22,6 @@
     End Sub
 
     Friend Sub Handle(context As IModelContext)
-        context.Dispatch(straightenTable, AddressOf HandleInvalidCommand)
+        context.DispatchAlive(straightenTable, AddressOf HandleInvalidCommand)
     End Sub
 End Module

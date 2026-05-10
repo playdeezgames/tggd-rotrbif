@@ -7,8 +7,12 @@ Friend Module GreetStatement
             {ObjectIdentifier.GORACHAN, Sub(context, other) context.Output($"{other.GetName()} says ""Henlo.""")}
         }
     Friend Sub Handle(context As IModelContext)
-        Dim name = context.ReadRemainingTokens()
         Dim avatar = context.World.Avatar
+        If avatar.IsDead Then
+            HandleInvalidCommand(context)
+            Return
+        End If
+        Dim name = context.ReadRemainingTokens()
         Dim other = avatar.Location.FindOtherByName(avatar, name)
         If other Is Nothing Then
             HandleInvalidCommand(context)

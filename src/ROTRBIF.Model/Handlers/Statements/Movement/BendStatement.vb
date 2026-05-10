@@ -22,7 +22,7 @@
     End Sub
 
     Friend Sub Handle(context As IModelContext)
-        context.Dispatch(bendTable, AddressOf HandleInvalidCommand)
+        context.DispatchAlive(bendTable, AddressOf HandleInvalidCommand)
     End Sub
 
 End Module

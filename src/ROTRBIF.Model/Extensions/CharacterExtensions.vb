@@ -5,7 +5,7 @@ Imports TGGD.Business
 Public Module CharacterExtensions
     <Extension>
     Function GetAliveStatus(character As ICharacter) As String
-        Return If(character.GetTag(Tags.ALIVE), "alive", "dead")
+        Return If(Not character.IsDead, "alive", "dead")
     End Function
     <Extension>
     Function GetFacing(character As ICharacter) As Direction
@@ -14,10 +14,6 @@ Public Module CharacterExtensions
     <Extension>
     Sub Turn(character As ICharacter, turn As Turn)
         character.SetFacing(turn.NextFacing(character.GetFacing()))
-    End Sub
-    <Extension>
-    Sub SetAlive(character As ICharacter)
-        character.SetTag(Tags.ALIVE)
     End Sub
     <Extension>
     Sub SetFacing(character As ICharacter, direction As Direction)
