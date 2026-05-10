@@ -18,7 +18,11 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
     End Sub
 
     Public Sub SetStatistic(statisticType As String, statisticValue As Integer) Implements IEntity.SetStatistic
-        EntityData.Statistics(statisticType) = statisticValue
+        EntityData.Statistics(statisticType) =
+            Math.Clamp(
+                statisticValue,
+                GetStatisticMinimum(statisticType),
+                GetStatisticMaximum(statisticType))
     End Sub
 
     Public Function GetMetadata(metadataType As String) As String Implements IEntity.GetMetadata
@@ -34,7 +38,10 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
     End Function
 
     Public Function GetStatistic(statisticType As String) As Integer Implements IEntity.GetStatistic
-        Return EntityData.Statistics(statisticType)
+        Return Math.Clamp(
+            EntityData.Statistics(statisticType),
+            GetStatisticMinimum(statisticType),
+            GetStatisticMaximum(statisticType))
     End Function
 
     Public Sub ClearTag(tagType As String) Implements IEntity.ClearTag
@@ -66,6 +73,30 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
         EntityData.Yokes.Remove(yokeType)
     End Sub
 
+    Public Function GetStatisticMinimum(statisticType As String) As Integer Implements IEntity.GetStatisticMinimum
+        Dim result As Integer = Integer.MinValue
+        If Not EntityData.StatisticMinimums.TryGetValue(statisticType, result) Then
+            result = Integer.MinValue
+        End If
+        Return result
+    End Function
+
+    Public Sub SetStatisticMinimum(statisticType As String, minimum As Integer) Implements IEntity.SetStatisticMinimum
+        EntityData.StatisticMinimums(statisticType) = minimum
+    End Sub
+
+    Public Sub SetStatisticMaximum(statisticType As String, maximum As Integer) Implements IEntity.SetStatisticMaximum
+        EntityData.StatisticMaximums(statisticType) = maximum
+    End Sub
+
+    Public Function GetStatisticMaximum(statisticType As String) As Integer Implements IEntity.GetStatisticMaximum
+        Dim result As Integer = Integer.MaxValue
+        If Not EntityData.StatisticMaximums.TryGetValue(statisticType, result) Then
+            result = Integer.MaxValue
+        End If
+        Return result
+    End Function
+
     Protected MustOverride ReadOnly Property EntityData As TEntity
 
     Public ReadOnly Property World As IWorld Implements IEntity.World
@@ -73,4 +104,6 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
             Return Business.World.Create(WorldData)
         End Get
     End Property
+
+    Public MustOverride ReadOnly Property Exists As Boolean Implements IEntity.Exists
 End Class

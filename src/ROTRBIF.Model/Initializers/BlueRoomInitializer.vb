@@ -39,6 +39,14 @@ Friend Module BlueRoomInitializer
         character.SetFacing(Direction.North)
         character.SetCheckCount(0)
         character.SetTag(Tags.HAS_ASS_KEY)
+        character.SetStatisticMinimum(Statistics.JOOLS, 0)
         character.SetStatistic(Statistics.JOOLS, 0)
+        character.SetStatisticMinimum(Statistics.HEALTH, 0)
+        character.SetStatistic(Statistics.HEALTH, 3)
+        character.SetStatisticMaximum(Statistics.HEALTH, 3)
+        character.SetStatistic(Statistics.ATTACK_DICE, 1)
+        character.SetStatistic(Statistics.ATTACK_LIMIT, 1)
+        character.SetStatistic(Statistics.DEFEND_DICE, 1)
+        character.SetStatistic(Statistics.DEFEND_LIMIT, 1)
     End Sub
 End Module

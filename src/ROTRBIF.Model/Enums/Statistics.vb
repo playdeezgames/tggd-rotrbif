@@ -1,9 +1,14 @@
 ﻿Friend Module Statistics
-    Friend ReadOnly FACING As String = NameOf(FACING)
+    Friend ReadOnly ATTACK_DICE As String = NameOf(ATTACK_DICE)
+    Friend ReadOnly ATTACK_LIMIT As String = NameOf(ATTACK_LIMIT)
     Friend ReadOnly CHECK_COUNT As String = NameOf(CHECK_COUNT)
+    Friend ReadOnly DEFEND_DICE As String = NameOf(DEFEND_DICE)
+    Friend ReadOnly DEFEND_LIMIT As String = NameOf(DEFEND_LIMIT)
+    Friend ReadOnly FACING As String = NameOf(FACING)
+    Friend ReadOnly HEALTH As String = NameOf(HEALTH)
     Friend ReadOnly JOOLS As String = NameOf(JOOLS)
     Friend ReadOnly OBJECT_IDENTIFIER As String = NameOf(OBJECT_IDENTIFIER)
+    Friend ReadOnly RAT_TAILS_REMAINING As String = NameOf(RAT_TAILS_REMAINING)
     Friend ReadOnly TOWN_COLUMN As String = NameOf(TOWN_COLUMN)
     Friend ReadOnly TOWN_ROW As String = NameOf(TOWN_ROW)
-    Friend ReadOnly RAT_TAILS_REMAINING As String = NameOf(RAT_TAILS_REMAINING)
 End Module

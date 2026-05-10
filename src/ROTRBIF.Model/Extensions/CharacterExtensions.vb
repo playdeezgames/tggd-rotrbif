@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.CompilerServices
 Imports ROTRBIFOS.Business
+Imports TGGD.Business
 
 Public Module CharacterExtensions
     <Extension>
@@ -68,5 +69,47 @@ Public Module CharacterExtensions
             Return character.World.GetFeature(character.GetYoke(Yokes.FEATURE))
         End If
         Return Nothing
+    End Function
+    <Extension>
+    Function IsDead(character As ICharacter) As Boolean
+        Return character.GetStatistic(Statistics.HEALTH) <= character.GetStatisticMinimum(Statistics.HEALTH)
+    End Function
+    Const DIE_SIZE = 6
+    <Extension>
+    Function RollAttack(character As ICharacter) As Integer
+        Dim attackDice = character.GetStatistic(Statistics.ATTACK_DICE)
+        Dim attackLimit = character.GetStatistic(Statistics.ATTACK_LIMIT)
+        Return Math.Min(
+            attackLimit,
+            Enumerable.
+                Range(0, attackDice).
+                Select(Function(x) RNG.FromRange(1, DIE_SIZE) = DIE_SIZE).
+                Count(Function(x) x))
+    End Function
+    <Extension>
+    Function RollDefend(character As ICharacter) As Integer
+        Dim attackDice = character.GetStatistic(Statistics.DEFEND_DICE)
+        Dim attackLimit = character.GetStatistic(Statistics.DEFEND_LIMIT)
+        Return Math.Min(
+            attackLimit,
+            Enumerable.
+                Range(0, attackDice).
+                Select(Function(x) RNG.FromRange(1, DIE_SIZE) = DIE_SIZE).
+                Count(Function(x) x))
+    End Function
+    <Extension>
+    Sub DoDamage(character As ICharacter, damage As Integer)
+        character.ChangeStatistic(Statistics.HEALTH, -damage)
+    End Sub
+    <Extension>
+    Sub Kill(character As ICharacter)
+        If character.IsAvatar Then
+            Return
+        End If
+        character.Destroy()
+    End Sub
+    <Extension>
+    Function GetHealth(character As ICharacter) As Integer
+        Return character.GetStatistic(Statistics.HEALTH)
     End Function
 End Module

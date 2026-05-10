@@ -13,4 +13,9 @@
     Function HasYoke(yokeType As String) As Boolean
     Function GetYoke(yokeType As String) As Guid
     Sub ClearYoke(yokeType As String)
+    Function GetStatisticMinimum(statisticType As String) As Integer
+    Sub SetStatisticMinimum(statisticType As String, minimum As Integer)
+    Sub SetStatisticMaximum(statisticType As String, maximum As Integer)
+    Function GetStatisticMaximum(statisticType As String) As Integer
+    ReadOnly Property Exists As Boolean
 End Interface

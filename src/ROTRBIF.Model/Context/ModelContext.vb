@@ -29,7 +29,11 @@ Friend Class ModelContext
     End Property
 
     Public Sub Output(text As String) Implements IModelContext.Output
-        outputter(text)
+        outputter(
+            If(
+                String.IsNullOrEmpty(text),
+                text,
+                Char.ToUpper(text(0)) + text.Substring(1)))
     End Sub
 
     Public Sub Quit() Implements IModelContext.Quit

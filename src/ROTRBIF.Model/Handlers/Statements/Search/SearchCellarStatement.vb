@@ -14,5 +14,13 @@
     Private Sub CreateRat(character As ROTRBIFOS.Business.ICharacter)
         character.SetName(Names.RAT)
         character.SetMetadata(Metadatas.ENEMY_TYPE, EnemyTypes.RAT)
+        character.SetStatisticMinimum(Statistics.HEALTH, 0)
+        character.SetStatistic(Statistics.HEALTH, 1)
+        character.SetStatisticMaximum(Statistics.HEALTH, 1)
+        character.SetStatistic(Statistics.ATTACK_DICE, 1)
+        character.SetStatistic(Statistics.ATTACK_LIMIT, 1)
+        character.SetStatistic(Statistics.DEFEND_DICE, 1)
+        character.SetStatistic(Statistics.DEFEND_LIMIT, 1)
+        character.SetTag(Tags.ENEMY)
     End Sub
 End Module

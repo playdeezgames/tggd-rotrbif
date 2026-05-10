@@ -25,6 +25,12 @@ Friend Class Route
 
     Public ReadOnly Property Direction As String Implements IRoute.Direction
 
+    Public Overrides ReadOnly Property Exists As Boolean
+        Get
+            Return worldData.Routes.ContainsKey(RouteId)
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As RouteData
         Get
             Return worldData.Routes(RouteId)

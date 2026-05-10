@@ -16,6 +16,11 @@ Friend Class Character
             Nothing)
     End Function
 
+    Public Sub Destroy() Implements ICharacter.Destroy
+        Location.RemoveCharacter(Me)
+        worldData.Characters.Remove(CharacterId)
+    End Sub
+
     Public ReadOnly Property CharacterId As Guid Implements ICharacter.CharacterId
 
     Protected Overrides ReadOnly Property EntityData As CharacterData
@@ -35,5 +40,17 @@ Friend Class Character
                 Location.AddCharacter(Me)
             End If
         End Set
+    End Property
+
+    Public ReadOnly Property IsAvatar As Boolean Implements ICharacter.IsAvatar
+        Get
+            Return worldData.AvatarCharacterId.HasValue AndAlso worldData.AvatarCharacterId.Value = CharacterId
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property Exists As Boolean
+        Get
+            Return worldData.Characters.ContainsKey(CharacterId)
+        End Get
     End Property
 End Class

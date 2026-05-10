@@ -11,6 +11,12 @@ Friend Class Feature
 
     Public ReadOnly Property FeatureId As Guid Implements IFeature.FeatureId
 
+    Public Overrides ReadOnly Property Exists As Boolean
+        Get
+            Return worldData.Features.ContainsKey(FeatureId)
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As FeatureData
         Get
             Return worldData.Features(FeatureId)
