@@ -15,9 +15,6 @@ Friend Module HealerInitializer
                    location.CreateCharacter(AddressOf InitializeMårten)
                    location.CreateRoute(Direction.Out.GetName, exitDestination)
                    exitDestination.CreateRoute(Direction.In.GetName, location)
-#If DEBUG Then
-                   location.World.Avatar = location.CreateCharacter(AddressOf InitializeN00b)
-#End If
                End Sub
     End Function
 
