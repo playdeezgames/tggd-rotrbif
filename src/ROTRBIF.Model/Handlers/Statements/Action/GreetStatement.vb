@@ -4,7 +4,8 @@ Friend Module GreetStatement
     Private ReadOnly objectTable As IReadOnlyDictionary(Of ObjectIdentifier, Action(Of IModelContext, ICharacter)) =
         New Dictionary(Of ObjectIdentifier, Action(Of IModelContext, ICharacter)) From
         {
-            {ObjectIdentifier.GORACHAN, Sub(context, other) context.Output($"{other.GetName()} says ""Henlo.""")}
+            {ObjectIdentifier.GORACHAN, Sub(context, other) context.Output($"{other.GetName()} says ""Henlo.""")},
+            {ObjectIdentifier.HEALER, Sub(context, other) context.Output($"{other.GetName()} says ""Nothing matters.""")}
         }
     Friend Sub Handle(context As IModelContext)
         Dim avatar = context.World.Avatar

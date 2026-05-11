@@ -14,4 +14,6 @@
     Friend ReadOnly THE_NEXT_ROOM As String = "the next room"
     Friend ReadOnly YLIOPPILASLAKKI As String = "ylioppilaslakki"
     Friend ReadOnly RAT_TAIL As String = "rat tail"
+    Friend ReadOnly HEALER_HOUSE As String = "Nihilistic House of Healing"
+    Friend ReadOnly MÅRTEN As String = "Mårten"
 End Module

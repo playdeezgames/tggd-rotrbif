@@ -5,5 +5,6 @@ Friend Module WorldInitializer
         Dim town = TownInitializer.Initialize(world)
         BlueRoomInitializer.Initialize(town)
         InnInitializer.Initialize(town)
+        HealerInitializer.Initialize(town)
     End Sub
 End Module
