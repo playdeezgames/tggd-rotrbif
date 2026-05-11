@@ -11,6 +11,7 @@
     Const SearchCommand = "Search"
     Const GreetCommand = "Greet"
     Const AskCommand = "Ask"
+    Const GiveCommand = "Give"
 
     Private ReadOnly statementTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
         New Dictionary(Of String, Action(Of IModelContext)) From
@@ -26,7 +27,8 @@
             {UnlockCommand, AddressOf UnlockStatement.Handle},
             {SearchCommand, AddressOf SearchStatement.Handle},
             {GreetCommand, AddressOf GreetStatement.Handle},
-            {AskCommand, AddressOf AskStatement.Handle}
+            {AskCommand, AddressOf AskStatement.Handle},
+            {GiveCommand, AddressOf GiveStatement.Handle}
         }
 
     Friend Sub Handle(context As IModelContext)

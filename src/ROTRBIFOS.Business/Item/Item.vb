@@ -32,6 +32,11 @@ Friend Class Item
         End Get
     End Property
 
+    Public Overrides Sub Destroy()
+        Inventory.RemoveItem(Me)
+        worldData.Items.Remove(ItemId)
+    End Sub
+
     Friend Shared Function TryFind(worldData As WorldData, itemId As Guid) As IItem
         Return New Item(worldData, itemId)
     End Function

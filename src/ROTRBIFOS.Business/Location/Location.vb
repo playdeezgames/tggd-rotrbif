@@ -69,6 +69,10 @@ Friend Class Location
         EntityData.FeatureIds.Add(feature.FeatureId)
     End Sub
 
+    Public Overrides Sub Destroy()
+        worldData.Locations.Remove(LocationId)
+    End Sub
+
     Friend Shared Function TryFind(worldData As WorldData, locationId As Guid?) As ILocation
         Return If(
             locationId.HasValue AndAlso worldData.Locations.ContainsKey(locationId.Value),

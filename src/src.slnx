@@ -6,6 +6,7 @@
     <File Path="../.gitignore" />
     <File Path="../README.md" />
     <File Path="../shippit.sh" />
+    <File Path="secretsSHHHH.md" />
   </Folder>
   <Project Path="ROTRBIF.Model/ROTRBIF.Model.vbproj" Id="1102e020-6ccd-460a-b6a9-4e27d5166bc8" />
   <Project Path="ROTRBIFOS.Business/ROTRBIFOS.Business.vbproj" Id="a47e05ce-dce3-46e4-85b2-fdb0ac36d16f" />

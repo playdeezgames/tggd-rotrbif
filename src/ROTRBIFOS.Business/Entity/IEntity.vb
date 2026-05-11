@@ -18,4 +18,5 @@
     Sub SetStatisticMaximum(statisticType As String, maximum As Integer)
     Function GetStatisticMaximum(statisticType As String) As Integer
     ReadOnly Property Exists As Boolean
+    Sub Destroy()
 End Interface

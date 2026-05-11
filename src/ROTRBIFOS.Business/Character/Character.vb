@@ -16,7 +16,7 @@ Friend Class Character
             Nothing)
     End Function
 
-    Public Sub Destroy() Implements ICharacter.Destroy
+    Public Overrides Sub Destroy()
         Location.RemoveCharacter(Me)
         worldData.Characters.Remove(CharacterId)
     End Sub

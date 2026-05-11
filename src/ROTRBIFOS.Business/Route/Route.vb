@@ -37,6 +37,10 @@ Friend Class Route
         End Get
     End Property
 
+    Public Overrides Sub Destroy()
+        worldData.Routes.Remove(RouteId)
+    End Sub
+
     Friend Shared Function TryFind(
                                   worldData As Data.WorldData,
                                   routeId As Guid?,

@@ -8,4 +8,7 @@ Friend Interface IModelContext
     ReadOnly Property HasTokens As Boolean
     Function ReadToken() As String
     Function ReadRemainingTokens() As String
+    Function HasToken(token As String) As Boolean
+    Function ReadUntilToken(token As String) As String
+    Sub DiscardToken()
 End Interface

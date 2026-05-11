@@ -97,6 +97,7 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
         Return result
     End Function
 
+    Public MustOverride Sub Destroy() Implements IEntity.Destroy
     Protected MustOverride ReadOnly Property EntityData As TEntity
 
     Public ReadOnly Property World As IWorld Implements IEntity.World

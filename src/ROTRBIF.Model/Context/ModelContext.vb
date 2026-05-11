@@ -40,6 +40,12 @@ Friend Class ModelContext
         quitter()
     End Sub
 
+    Public Sub DiscardToken() Implements IModelContext.DiscardToken
+        If HasTokens Then
+            _tokens = _tokens.Skip(1)
+        End If
+    End Sub
+
     Public Function ReadToken() As String Implements IModelContext.ReadToken
         Dim result = Tokens.First
         _tokens = _tokens.Skip(1)
@@ -49,6 +55,17 @@ Friend Class ModelContext
     Public Function ReadRemainingTokens() As String Implements IModelContext.ReadRemainingTokens
         Dim result = String.Join(" ", _tokens)
         _tokens = Array.Empty(Of String)
+        Return result
+    End Function
+
+    Public Function HasToken(token As String) As Boolean Implements IModelContext.HasToken
+        Return _tokens.Any(Function(x) x = token)
+    End Function
+
+    Public Function ReadUntilToken(token As String) As String Implements IModelContext.ReadUntilToken
+        Dim tokenIndex = _tokens.ToList.IndexOf(token)
+        Dim result = String.Join(" ", _tokens.Take(tokenIndex))
+        _tokens = _tokens.Skip(tokenIndex)
         Return result
     End Function
 End Class

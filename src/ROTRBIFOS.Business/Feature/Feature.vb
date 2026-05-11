@@ -23,6 +23,10 @@ Friend Class Feature
         End Get
     End Property
 
+    Public Overrides Sub Destroy()
+        worldData.Features.Remove(FeatureId)
+    End Sub
+
     Friend Shared Function TryFind(worldData As WorldData, featureId As Guid?) As IFeature
         Return If(
             featureId.HasValue AndAlso worldData.Features.ContainsKey(featureId.Value),

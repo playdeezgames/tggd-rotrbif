@@ -20,4 +20,8 @@ Friend Module InventoryExtensions
                 Return $"{String.Join(", ", items.Take(items.Count - 1).Select(Function(y) y.GetName()))} And {items.Last.GetName()}"
         End Select
     End Function
+    <Extension>
+    Function FindItemByName(inventory As IInventory, itemName As String) As IItem
+        Return inventory.Items.FirstOrDefault(Function(x) x.GetName = itemName)
+    End Function
 End Module
