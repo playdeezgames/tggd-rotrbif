@@ -21,6 +21,7 @@
         character.SetStatistic(Statistics.ATTACK_LIMIT, 1)
         character.SetStatistic(Statistics.DEFEND_DICE, 1)
         character.SetStatistic(Statistics.DEFEND_LIMIT, 1)
+        character.SetStatistic(Statistics.XP_VALUE, 1)
         character.SetTag(Tags.ENEMY)
         character.Inventory.CreateItem(AddressOf CreateRatTail)
     End Sub

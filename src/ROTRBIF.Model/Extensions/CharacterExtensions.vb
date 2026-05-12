@@ -98,23 +98,39 @@ Public Module CharacterExtensions
         character.ChangeStatistic(Statistics.HEALTH, -damage)
     End Sub
     <Extension>
-    Sub Kill(character As ICharacter)
-        If character.IsAvatar Then
+    Sub Kill(victim As ICharacter)
+        If victim.IsAvatar Then
             Return
         End If
-        Dim locationInventory = character.Location.Inventory
-        For Each item In character.Inventory.Items
+        Dim locationInventory = victim.Location.Inventory
+        For Each item In victim.Inventory.Items
             item.Inventory = locationInventory
             locationInventory.AddItem(item)
         Next
-        character.Destroy()
+        victim.Destroy()
     End Sub
     <Extension>
     Function GetHealth(character As ICharacter) As Integer
         Return character.GetStatistic(Statistics.HEALTH)
     End Function
     <Extension>
+    Function GetXP(character As ICharacter) As Integer
+        Return character.GetStatistic(Statistics.XP)
+    End Function
+    <Extension>
+    Function GetSkillPoints(character As ICharacter) As Integer
+        Return character.GetStatistic(Statistics.SKILL_POINTS)
+    End Function
+    <Extension>
+    Function GetXPLevel(character As ICharacter) As Integer
+        Return character.GetStatistic(Statistics.XP_LEVEL)
+    End Function
+    <Extension>
     Function GetMaximumHealth(character As ICharacter) As Integer
         Return character.GetStatisticMaximum(Statistics.HEALTH)
+    End Function
+    <Extension>
+    Function GetMaximumXP(character As ICharacter) As Integer
+        Return character.GetStatisticMaximum(Statistics.XP)
     End Function
 End Module

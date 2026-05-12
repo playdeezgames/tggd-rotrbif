@@ -11,4 +11,8 @@
     Friend ReadOnly RAT_TAILS_REMAINING As String = NameOf(RAT_TAILS_REMAINING)
     Friend ReadOnly TOWN_COLUMN As String = NameOf(TOWN_COLUMN)
     Friend ReadOnly TOWN_ROW As String = NameOf(TOWN_ROW)
+    Friend ReadOnly XP_VALUE As String = NameOf(XP_VALUE)
+    Friend ReadOnly XP As String = NameOf(XP)
+    Friend ReadOnly XP_LEVEL As String = NameOf(XP_LEVEL)
+    Friend ReadOnly SKILL_POINTS As String = NameOf(SKILL_POINTS)
 End Module

@@ -47,5 +47,12 @@ Friend Module BlueRoomInitializer
         character.SetStatistic(Statistics.ATTACK_LIMIT, 1)
         character.SetStatistic(Statistics.DEFEND_DICE, 1)
         character.SetStatistic(Statistics.DEFEND_LIMIT, 1)
+        character.SetStatistic(Statistics.XP, 0)
+        character.SetStatisticMinimum(Statistics.XP, 0)
+        character.SetStatisticMaximum(Statistics.XP, 5)
+        character.SetStatistic(Statistics.XP_LEVEL, 1)
+        character.SetStatisticMinimum(Statistics.XP_LEVEL, 1)
+        character.SetStatistic(Statistics.SKILL_POINTS, 0)
+        character.SetStatisticMinimum(Statistics.SKILL_POINTS, 0)
     End Sub
 End Module
