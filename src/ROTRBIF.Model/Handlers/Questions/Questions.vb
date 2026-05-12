@@ -5,6 +5,7 @@
     Const ExitsCommand = "Exits"
     Const FeaturesCommand = "Features"
     Const OthersCommand = "Others"
+    Const StatisticsCommand = "Statistics"
 
     Private ReadOnly questionTable As IReadOnlyDictionary(Of String, Action(Of IModelContext)) =
         New Dictionary(Of String, Action(Of IModelContext)) From
@@ -14,7 +15,8 @@
             {GroundCommand, AddressOf GroundQuestion.Handle},
             {ExitsCommand, AddressOf ExitsQuestion.Handle},
             {FeaturesCommand, AddressOf FeaturesQuestion.Handle},
-            {OthersCommand, AddressOf OthersQuestion.Handle}
+            {OthersCommand, AddressOf OthersQuestion.Handle},
+            {StatisticsCommand, AddressOf StatisticsQuestion.Handle}
         }
 
     Friend Sub Handle(context As IModelContext)

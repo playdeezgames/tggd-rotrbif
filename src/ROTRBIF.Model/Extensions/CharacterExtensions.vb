@@ -113,4 +113,8 @@ Public Module CharacterExtensions
     Function GetHealth(character As ICharacter) As Integer
         Return character.GetStatistic(Statistics.HEALTH)
     End Function
+    <Extension>
+    Function GetMaximumHealth(character As ICharacter) As Integer
+        Return character.GetStatisticMaximum(Statistics.HEALTH)
+    End Function
 End Module
