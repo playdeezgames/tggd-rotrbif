@@ -35,4 +35,12 @@ Friend Module LocationExtensions
     Friend Function FindOtherByName(location As ILocation, character As ICharacter, name As String) As ICharacter
         Return location.GetOthers(character).FirstOrDefault(Function(x) x.GetName() = name)
     End Function
+    <Extension>
+    Friend Sub SetWanderingMonsters(location As ILocation, wanderingMonsters As WanderingMonsters)
+        location.SetStatistic(Statistics.WANDERING_MONSTERS, CInt(wanderingMonsters))
+    End Sub
+    <Extension>
+    Friend Sub ClearWanderingMonsters(location As ILocation)
+        location.ClearStatistic(Statistics.WANDERING_MONSTERS)
+    End Sub
 End Module

@@ -98,6 +98,11 @@ Friend MustInherit Class Entity(Of TEntity As EntityData)
     End Function
 
     Public MustOverride Sub Destroy() Implements IEntity.Destroy
+
+    Public Sub ClearStatistic(statisticType As String) Implements IEntity.ClearStatistic
+        EntityData.Statistics.Remove(statisticType)
+    End Sub
+
     Protected MustOverride ReadOnly Property EntityData As TEntity
 
     Public ReadOnly Property World As IWorld Implements IEntity.World

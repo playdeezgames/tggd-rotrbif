@@ -16,4 +16,5 @@
     Function HasOthers(character As ICharacter) As Boolean
     ReadOnly Property Characters As IEnumerable(Of ICharacter)
     Function GetOthers(character As ICharacter) As IEnumerable(Of ICharacter)
+    Function HasRoute(direction As String) As Boolean
 End Interface

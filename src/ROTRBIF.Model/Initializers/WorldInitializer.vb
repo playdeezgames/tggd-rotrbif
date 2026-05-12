@@ -2,7 +2,8 @@
 
 Friend Module WorldInitializer
     Friend Sub Initialize(world As IWorld)
-        Dim town = TownInitializer.Initialize(world)
+        Dim wilderness = WildernessInitializer.Initialize(world)
+        Dim town = TownInitializer.Initialize(world, wilderness)
         BlueRoomInitializer.Initialize(town)
         InnInitializer.Initialize(town)
         HealerInitializer.Initialize(town)

@@ -48,6 +48,18 @@ Public Module DirectionExtensions
             {Direction.Up, 0},
             {Direction.Down, 0}
         }
+    Private ReadOnly oppositeTable As IReadOnlyDictionary(Of Direction, Direction) =
+        New Dictionary(Of Direction, Direction) From
+        {
+            {Direction.North, Direction.South},
+            {Direction.East, Direction.West},
+            {Direction.South, Direction.North},
+            {Direction.West, Direction.East},
+            {Direction.Up, Direction.Down},
+            {Direction.Down, Direction.Up},
+            {Direction.In, Direction.In},
+            {Direction.Out, Direction.Out}
+        }
     <Extension>
     Function GetName(direction As Direction) As String
         Return nameTable(direction)
@@ -59,5 +71,9 @@ Public Module DirectionExtensions
     <Extension>
     Function GetNextRow(direction As Direction, row As Integer) As Integer
         Return row + deltaYTable(direction)
+    End Function
+    <Extension>
+    Function GetOpposite(direction As Direction) As Direction
+        Return oppositeTable(direction)
     End Function
 End Module

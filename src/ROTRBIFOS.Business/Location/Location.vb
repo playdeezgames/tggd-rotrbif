@@ -134,4 +134,8 @@ Friend Class Location
             Where(Function(x) x <> character.CharacterId).
             Select(Function(x) Business.Character.TryFind(worldData, x))
     End Function
+
+    Public Function HasRoute(direction As String) As Boolean Implements ILocation.HasRoute
+        Return EntityData.RouteIds.ContainsKey(direction)
+    End Function
 End Class

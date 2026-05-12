@@ -15,4 +15,5 @@
     Friend ReadOnly XP As String = NameOf(XP)
     Friend ReadOnly XP_LEVEL As String = NameOf(XP_LEVEL)
     Friend ReadOnly SKILL_POINTS As String = NameOf(SKILL_POINTS)
+    Friend ReadOnly WANDERING_MONSTERS As String = NameOf(WANDERING_MONSTERS)
 End Module

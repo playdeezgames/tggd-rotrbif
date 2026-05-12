@@ -1,4 +1,5 @@
 ﻿Imports ROTRBIFOS.Business
+Imports TGGD.Business
 
 Friend Module TownInitializer
     Const TOWN_COLUMNS = 3
@@ -11,14 +12,21 @@ Friend Module TownInitializer
             Direction.South,
             Direction.West
         }
-    Friend Function Initialize(world As IWorld) As List(Of ILocation)
+    Friend Function Initialize(world As IWorld, wilderness As List(Of ILocation)) As List(Of ILocation)
         Const TOWN_LOCATION_COUNT = TOWN_COLUMNS * TOWN_ROWS
+        Dim exitDestination = RNG.FromList(wilderness)
+        exitDestination.ClearWanderingMonsters()
+        wilderness.Remove(exitDestination)
         Dim result As List(Of ILocation) =
             Enumerable.Range(0, TOWN_LOCATION_COUNT).
             Select(Function(x) world.CreateLocation(InitializeTownLocation(x))).ToList
         For Each townLocation In result
             Dim column = townLocation.GetStatistic(Statistics.TOWN_COLUMN)
             Dim row = townLocation.GetStatistic(Statistics.TOWN_ROW)
+            If column = TOWN_COLUMNS \ 2 AndAlso row = 0 Then
+                exitDestination.CreateRoute(Direction.In.GetName, townLocation)
+                townLocation.CreateRoute(Direction.Out.GetName, exitDestination)
+            End If
             For Each direction In directions
                 Dim nextColumn = direction.GetNextColumn(column)
                 Dim nextRow = direction.GetNextRow(row)
