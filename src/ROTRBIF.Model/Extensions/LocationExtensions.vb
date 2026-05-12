@@ -43,4 +43,11 @@ Friend Module LocationExtensions
     Friend Sub ClearWanderingMonsters(location As ILocation)
         location.ClearStatistic(Statistics.WANDERING_MONSTERS)
     End Sub
+    <Extension>
+    Friend Function GetWanderingMonsters(location As ILocation) As WanderingMonsters?
+        If location.HasStatistic(Statistics.WANDERING_MONSTERS) Then
+            Return CType(location.GetStatistic(Statistics.WANDERING_MONSTERS), WanderingMonsters)
+        End If
+        Return Nothing
+    End Function
 End Module
